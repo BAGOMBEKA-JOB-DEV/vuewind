@@ -1,1 +1,1 @@
-All your Vue tailwind components 😁😁
+All your Vue tailwind components 
