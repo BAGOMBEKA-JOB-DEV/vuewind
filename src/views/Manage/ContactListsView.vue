@@ -4,7 +4,9 @@ import ButtonDefault from '@/components/Buttons/ButtonDefault.vue'
 
 </script>
 <template>
-  <DefaultLayout>
-
+  <DefaultLayout >
+<p class="text-secondary-400">
+  This is the Dashboard page!
+</p>
   </DefaultLayout>
 </template>
