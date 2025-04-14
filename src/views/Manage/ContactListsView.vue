@@ -5,6 +5,6 @@ import ButtonDefault from '@/components/Buttons/ButtonDefault.vue'
 </script>
 <template>
   <DefaultLayout>
-<ButtonDefault/>
+
   </DefaultLayout>
 </template>
