@@ -42,7 +42,7 @@ const menuGroups = ref([
                     fill=""
                   />
                 </svg>`,
-        label: 'Buttons',
+        label: 'Dashboard',
          visible: true,
         route: '/',
       },
@@ -54,16 +54,16 @@ const menuGroups = ref([
 </svg>
 
 `,
-        label: 'Admin',
+        label: 'Forms',
         route: '#',
         children: [
-          { label: 'Manage Roles', route: '/roles' },
-          { label: 'Admin Users', route: '/admin-users' },
-          { label: 'Customer Alerts', route: '/customer-alerts' },
-          { label: 'System Logs', route: '/system-logs' },
-          { label: 'Customer  Logs', route: '/customer-account-logs' },
-          { label: 'Vendor  Logs', route: '/vendor-account-logs' },
-          { label: 'Re-Push DLR', route: '/push-dlr' },
+          { label: 'Buttons', route: '' },
+          { label: 'Input Group', route: '' },
+          { label: 'Check Boxes', route: '' },
+          { label: 'Range', route: '' },
+          { label: 'Date', route: '/' },
+          { label: 'Search', route: '' },
+          { label: 'Form Examples', route: '' },
         ],
         visible: true,
       },
