@@ -23,4 +23,3 @@ npm run build
 npm run lint
 ```
 
-### NB: Run the client in development mode and also start the eureker server and the Neil-Zuul project these two are java projects (spring)
