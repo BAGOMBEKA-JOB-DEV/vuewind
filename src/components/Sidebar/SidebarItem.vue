@@ -23,7 +23,7 @@ const handleItemClick = () => {
   <li>
     <router-link
       :to="item.route"
-      class="group mt-4  w-auto text-[20px] relative flex items-center gap-2.5 rounded-sm py-2 px-4  font-semibold  text-bodydark1 duration-300 ease-in-out active:bg-graydark dark:hover:bg-meta-4"
+      class="group mt-4  w-auto text-[16.5px]  relative flex items-center gap-2.5 rounded-sm py-2 px-4  font-semibold  text-bodydark1 duration-300 ease-in-out active:bg-graydark dark:hover:bg-meta-4"
       @click.prevent="handleItemClick"
       :class="{
         'bg-graydark dark:bg-meta-4 ': sidebarStore.page === item.label
@@ -34,7 +34,7 @@ const handleItemClick = () => {
       {{ item.label }}
 <svg
   v-if="item.children"
-  class="absolute right-8 font-bold  top-1/2 -translate-y-1/2 text-secondary-400 transition-transform duration-300 ease-in-out"
+  class="absolute right-1 font-bold  top-1/2 -translate-y-1/2 text-secondary-400 transition-transform duration-300 ease-in-out"
   :class="{ 'rotate-90 ': sidebarStore.page === item.label }"
   width="20"
   height="20"
@@ -55,7 +55,7 @@ const handleItemClick = () => {
     </router-link>
 
     <!-- Dropdown Menu Start -->
-    <div class="translate  overflow-hidden" v-show="sidebarStore.page === item.label">
+    <div class="translate  overflow-y-auto" v-show="sidebarStore.page === item.label">
       <SidebarDropdown
         v-if="item.children"
         :items="item.children"

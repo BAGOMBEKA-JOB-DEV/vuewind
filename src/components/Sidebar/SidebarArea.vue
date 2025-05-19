@@ -58,12 +58,230 @@ const menuGroups = ref([
         route: '#',
         children: [
           { label: 'Buttons', route: '' },
-          { label: 'Input Group', route: '' },
+          { label: 'Email Input', route: '' },
           { label: 'Check Boxes', route: '' },
+          { label: 'Number Input', route: '' },
+          { label: 'Select Dropdown', route: '' },
+          { label: 'Phone Input', route: '' },
+          { label: 'Radio Buttons', route: '' },
+          { label: 'Time Picker', route: '' },
+          { label: 'File Upload', route: '' },
+          { label: 'AutoComplete / Typehead', route: '' },
+          { label: 'Form Validation Messages', route: '' },
+          { label: 'Form Steps / Wizard', route: '' },
           { label: 'Range', route: '' },
           { label: 'Date', route: '/' },
           { label: 'Search', route: '' },
           { label: 'Form Examples', route: '' },
+        ],
+        visible: true,
+      },
+      {
+        icon: `<svg xmlns="http://www.w3.org/2000/svg"
+         fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" class="size-6 text-secondary-400">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0Zm1.294 6.336a6.721 6.721 0 0 1-3.17.789 6.721 6.721 0 0 1-3.168-.789 3.376 3.376 0 0 1 6.338 0Z" />
+</svg>
+
+`,
+        label: 'Navigation',
+        route: '#',
+        children: [
+          { label: 'Navbar (Top Navigation)', route: '' },
+          { label: 'Sidebar (Collapsible, Static)', route: '' },
+          { label: 'Breadcrumbs', route: '' },
+          { label: 'Tabs', route: '' },
+          { label: 'Pagination', route: '/' },
+          { label: 'Drawer / Slide Menu', route: '' },
+          { label: 'Dropdown Menu', route: '' },
+          { label: 'Mega Menu', route: '/' },
+          { label: 'Footer Navigation', route: '' },
+          { label: 'Stepper / Progress Tracker', route: '' },
+        ],
+        visible: true,
+      },
+      {
+        icon: `<svg xmlns="http://www.w3.org/2000/svg"
+         fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" class="size-6 text-secondary-400">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0Zm1.294 6.336a6.721 6.721 0 0 1-3.17.789 6.721 6.721 0 0 1-3.168-.789 3.376 3.376 0 0 1 6.338 0Z" />
+</svg>
+
+`,
+        label: 'Modals & Overlays',
+        route: '#',
+        children: [
+          { label: 'Modal Dialog', route: '' },
+          { label: 'Alert Dialog', route: '' },
+          { label: 'Confirmation Dialog', route: '' },
+          { label: 'Drawer / Offcanvas Panel', route: '' },
+          { label: 'Fullscreen Overlay', route: '/' },
+          { label: 'Lightbox / Image Preview', route: '' },
+          { label: 'Tooltip', route: '' },
+          { label: 'Popover', route: '/' },
+        ],
+        visible: true,
+      },
+      {
+        icon: `<svg xmlns="http://www.w3.org/2000/svg"
+         fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" class="size-6 text-secondary-400">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0Zm1.294 6.336a6.721 6.721 0 0 1-3.17.789 6.721 6.721 0 0 1-3.168-.789 3.376 3.376 0 0 1 6.338 0Z" />
+</svg>
+
+`,
+        label: 'Layouts',
+        route: '#',
+        children: [
+          { label: 'Grid System', route: '' },
+          { label: 'Flexbox Wrappers', route: '' },
+          { label: 'Cards', route: '' },
+          { label: 'Accordion', route: '' },
+          { label: 'Collapse Panels', route: '/' },
+          { label: 'Split View / Resizable Panes', route: '' },
+          { label: 'Masonry Layout', route: '' },
+          { label: 'Container / Wrapper', route: '/' },
+          { label: 'Spacers & Dividers', route: '/' },
+        ],
+        visible: true,
+      },
+      {
+        icon: `<svg xmlns="http://www.w3.org/2000/svg"
+         fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" class="size-6 text-secondary-400">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0Zm1.294 6.336a6.721 6.721 0 0 1-3.17.789 6.721 6.721 0 0 1-3.168-.789 3.376 3.376 0 0 1 6.338 0Z" />
+</svg>
+
+`,
+        label: 'Data & Display',
+        route: '#',
+        children: [
+          { label: 'Table / Data Grid', route: '' },
+          { label: 'List / Virtual List', route: '' },
+          { label: 'Timeline', route: '' },
+          { label: 'Calendar', route: '' },
+          { label: 'Avatar', route: '/' },
+          { label: 'Badge', route: '' },
+          { label: 'Tag / Chip', route: '' },
+          { label: 'ToolTip', route: '/' },
+          { label: 'JSON Viewer / Code Viewer', route: '/' },
+          { label: 'Profile Card', route: '/' },
+          { label: 'Statistic Widget / Metric Card', route: '' },
+      
+        ],
+        visible: true,
+      },
+      {
+        icon: `<svg xmlns="http://www.w3.org/2000/svg"
+         fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" class="size-6 text-secondary-400">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0Zm1.294 6.336a6.721 6.721 0 0 1-3.17.789 6.721 6.721 0 0 1-3.168-.789 3.376 3.376 0 0 1 6.338 0Z" />
+</svg>
+
+`,
+        label: 'Feedback',
+        route: '#',
+        children: [
+          { label: 'Toast / Snackbar', route: '' },
+          { label: 'Alerts (Success, Error, Warning, Info)', route: '' },
+          { label: 'Loading Spinner', route: '' },
+          { label: 'Skeleton Loader', route: '' },
+          { label: 'Progress Bar / Circular Progress', route: '/' },
+          { label: 'Error Boundary UI', route: '' },
+        ],
+        visible: true,
+      },
+      {
+        icon: `<svg xmlns="http://www.w3.org/2000/svg"
+         fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" class="size-6 text-secondary-400">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0Zm1.294 6.336a6.721 6.721 0 0 1-3.17.789 6.721 6.721 0 0 1-3.168-.789 3.376 3.376 0 0 1 6.338 0Z" />
+</svg>
+
+`,
+        label: 'Charts & Visualizations',
+        route: '#',
+        children: [
+          { label: 'Line Chart', route: '' },
+          { label: 'Bar Chart', route: '' },
+          { label: 'Donut Chart', route: '' },
+          { label: 'Area Chart', route: '' },
+          { label: 'Radar Chart', route: '/' },
+          { label: 'Heat Map', route: '' },
+          { label: 'Map / Geo Chart', route: '' },
+          { label: 'Guege / Meter', route: '/' },
+          { label: 'Custom SVG / Canvas Drawings', route: '' },
+        ],
+        visible: true,
+      },
+      {
+        icon: `<svg xmlns="http://www.w3.org/2000/svg"
+         fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" class="size-6 text-secondary-400">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0Zm1.294 6.336a6.721 6.721 0 0 1-3.17.789 6.721 6.721 0 0 1-3.168-.789 3.376 3.376 0 0 1 6.338 0Z" />
+</svg>
+
+`,
+        label: 'Aunthentication & Security',
+        route: '#',
+        children: [
+          { label: 'Login Forms', route: '' },
+          { label: 'Registration Form', route: '' },
+          { label: 'Password Reset', route: '' },
+          { label: '2FA Input', route: '' },
+          { label: 'CATPCHA', route: '/' },
+          { label: 'Role-Based UI Components', route: '' },
+          { label: 'Session Timeout Modal', route: '' },
+        ],
+        visible: true,
+      },
+      {
+        icon: `<svg xmlns="http://www.w3.org/2000/svg"
+         fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" class="size-6 text-secondary-400">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0Zm1.294 6.336a6.721 6.721 0 0 1-3.17.789 6.721 6.721 0 0 1-3.168-.789 3.376 3.376 0 0 1 6.338 0Z" />
+</svg>
+
+`,
+        label: 'Utilities / Miscellaneous',
+        route: '#',
+        children: [
+          { label: 'Search Input', route: '' },
+          { label: 'Sort Button / Toggle', route: '' },
+          { label: 'Filter Panel', route: '' },
+          { label: 'Theme Switcher (Dark/Light Mode)', route: '' },
+          { label: 'Language Switcher', route: '/' },
+          { label: 'Clipboard Button', route: '' },
+          { label: 'QR Generator', route: '' },
+          { label: 'File Previewer', route: '' },
+          { label: 'Custom Icons', route: '/' },
+          { label: 'Rating Stars', route: '' },
+          { label: 'Share Buttons', route: '' },
+          { label: 'Print View Button', route: '' },
+        ],
+        visible: true,
+      },
+      {
+        icon: `<svg xmlns="http://www.w3.org/2000/svg"
+         fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" class="size-6 text-secondary-400">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0Zm1.294 6.336a6.721 6.721 0 0 1-3.17.789 6.721 6.721 0 0 1-3.168-.789 3.376 3.376 0 0 1 6.338 0Z" />
+</svg>
+
+`,
+        label: ' AI / Smart UX',
+        route: '#',
+        children: [
+          { label: 'AI Chatbot UI', route: '' },
+          { label: 'Voice Command Button', route: '' },
+          { label: 'Smart Suggestions', route: '' },
+          { label: 'Speech-to-Text Field', route: '' },
+          { label: 'Image Recognition Uploader', route: '/' },
+          { label: 'AI Summary Box / Rewriter', route: '' },
+          { label: 'Smart Calendar', route: '' },
+          { label: 'AI-Powered Search', route: '/' },
+          { label: 'Smart Form Filler', route: '' },
+          { label: 'AI-Powered Analytics', route: '' },
         ],
         visible: true,
       },
