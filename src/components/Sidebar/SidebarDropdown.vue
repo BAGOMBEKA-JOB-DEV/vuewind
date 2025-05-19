@@ -22,7 +22,7 @@ const handleItemClick = (index) => {
         <router-link
           :to="childItem.route"
           @click="handleItemClick(index)"
-          class="group relative  flex items-center text-[18px] leading-normal gap-2.5  px-4 font-medium text-bodydark2 duration-300 ease-in-out text-white"
+          class="group relative  flex items-center text-[16px] leading-normal gap-2.5  px-4 font-medium text-bodydark2 duration-300 ease-in-out text-white"
           :class="{
             'active:graydark py-1.5  !bg-graydark !text-white': childItem.label === sidebarStore.selected
           }"
