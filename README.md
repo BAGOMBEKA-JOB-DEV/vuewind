@@ -15,25 +15,6 @@
 - 📦 Intended to be distributed as a **Vue component library**
 
 ---
-
-## 📁 Project Structure
-
-```
-
-vuewind/
-├── src/
-│   ├── components/        # All reusable UI components
-│   ├── assets/            # Static assets and styles
-│   ├── views/             # Example views using the components
-│   ├── App.vue            # Root component
-│   └── main.js            # Entry point
-├── public/
-├── package.json
-├── tailwind.config.js
-└── vite.config.js
-
-````
-
 ---
 
 ## 🔧 Project Setup
@@ -74,19 +55,11 @@ npm run lint
 
 Vuewind will soon be available as an installable package that can be added to your Vue projects. Stay tuned for:
 
-* `npm install vuewind-ui`
+* `npm install vuewind`
 * Component usage docs
 * Theme customization guide
 * Tree-shaking support
 
----
-
-## 🛠 Development Notes
-
-* This project runs alongside **Eureker Server** and **Neil-Zuul**—Java Spring Boot services.
-* Make sure these backend services are running during development for full functionality.
-
----
 
 ## ❤️ Contributing
 
@@ -103,11 +76,6 @@ Let’s build something beautiful and reusable for the Vue community.
 ## 📃 License
 
 MIT © 2025
-Crafted with care by [JOB](#)
+Crafted  by [ BAGOMBEKA JOB](#)
 
-```
-
----
-
-Let me know if you want help generating a component usage guide or documentation structure once you publish it as an npm package. This project sounds 🔥!
 ```
