@@ -11,43 +11,43 @@ onClickOutside(target, () => {
 })
 
 import userOne from '@/assets/images/user/user-01.png'
-import userTwo from '@/assets/images/user/user-02.png'
-import userThree from '@/assets/images/user/user-03.png'
-import userFour from '@/assets/images/user/user-04.png'
+import userTwo from '@/assets/images/user/user-01.png'
+import userThree from '@/assets/images/user/user-01.png'
+import userFour from '@/assets/images/user/user-01.png'
 
 const messagesList = ref([
   {
     route: '#',
     userImg: userTwo,
-    name: 'Mariya Desoja',
+    name: 'Bagombeka Job',
     message: 'I like your confidence 💪',
     time: '2min ago'
   },
   {
     route: '#',
     userImg: userOne,
-    name: 'Robert Jhon',
+    name: 'Bagombeka Job',
     message: 'Can you share your offer?',
     time: '10min ago'
   },
   {
     route: '#',
     userImg: userThree,
-    name: 'Henry Dholi',
+    name: 'Bagombeka JOB',
     message: 'I cam across your profile and...',
     time: '1day ago'
   },
   {
     route: '#',
     userImg: userFour,
-    name: 'Cody Fisher',
+    name: 'bagombeka job',
     message: 'I’m waiting for you response!',
     time: '5day ago'
   },
   {
     route: '#',
     userImg: userTwo,
-    name: 'Mariya Desoja',
+    name: 'Bagombeka Job',
     message: 'I like your confidence 💪',
     time: '2min ago'
   }

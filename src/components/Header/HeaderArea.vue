@@ -1,7 +1,7 @@
 <script setup lang="js">
 import { useSidebarStore } from '@/stores/sidebar'
 import DarkModeSwitcher from './DarkModeSwitcher.vue'
-// import DropdownMessage from './DropdownMessage.vue'
+import DropdownMessage from './DropdownMessage.vue'
 import DropdownNotification from './DropdownNotification.vue'
 import DropdownUser from './DropdownUser.vue'
 import { useRoute } from 'vue-router'
@@ -191,7 +191,7 @@ watch(
         <ul class="flex items-center gap-2 2xsm:gap-4">
           <li>
             <!-- Dark Mode Toggler -->
-            <!-- <DarkModeSwitcher /> -->
+             <DarkModeSwitcher /> 
             <!-- Dark Mode Toggler -->
           </li>
 
@@ -200,7 +200,7 @@ watch(
           <!-- Notification Menu Area -->
 
           <!-- Chat Notification Area -->
-          <!-- <DropdownMessage /> -->
+          <DropdownMessage />
           <!-- Chat Notification Area -->
         </ul>
 
