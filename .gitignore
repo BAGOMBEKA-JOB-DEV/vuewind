@@ -9,3 +9,6 @@ lib-dist/
 coverage/
 test-results/
 playwright-report/
+*.timestamp-*.mjs
+*.tgz
+artifacts/
