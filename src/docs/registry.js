@@ -1,4 +1,5 @@
 import { defineAsyncComponent } from "vue";
+import { packageExample } from "./utils/package-example.js";
 
 const records = import.meta.glob("./content/*.js", {
   eager: true,
@@ -38,5 +39,6 @@ export function loadExample(name) {
   return cache.get(name);
 }
 export async function loadExampleSource(name) {
-  return sources[`./examples/${name}Example.vue`]?.() || "";
+  const source = await sources[`./examples/${name}Example.vue`]?.();
+  return packageExample(source || "");
 }

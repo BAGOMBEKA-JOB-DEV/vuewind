@@ -328,7 +328,7 @@ try {
       );
       assert.match(
         await evaluate("document.querySelector('.demo-frame pre').textContent"),
-        /import VwButton/,
+        /import \{ VwButton \} from ['"]vuewind['"]/,
       );
       await screenshot("button-documentation.png", true);
     },
