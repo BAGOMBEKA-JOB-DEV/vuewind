@@ -28,7 +28,7 @@ const npm = process.platform === "win32" ? "npm.cmd" : "npm";
 const env = { ...process.env, npm_config_cache: path.join(temporary, "cache") };
 try {
   const pkg = JSON.parse(await readFile("package.json", "utf8"));
-  assert.equal(pkg.name, "vuewind");
+  assert.equal(pkg.name, "@bagombeka/vuewind");
   assert.equal(pkg.private, undefined);
   assert.deepEqual(
     Object.keys(pkg.dependencies || {}),
@@ -41,6 +41,7 @@ try {
     { cwd: root, env },
   );
   const [packed] = JSON.parse(stdout);
+  assert.equal(packed.filename, `bagombeka-vuewind-${pkg.version}.tgz`);
   const paths = packed.files.map((file) => file.path).sort();
   assert.deepEqual(
     paths,
@@ -65,7 +66,7 @@ try {
         name: "vuewind-release-consumer",
         private: true,
         type: "module",
-        dependencies: { vuewind: `file:${tarball}` },
+        dependencies: { "@bagombeka/vuewind": `file:${tarball}` },
       },
       null,
       2,
@@ -100,10 +101,10 @@ try {
   );
   const esmPath = path.join(
     consumer,
-    "node_modules/vuewind/lib-dist/vuewind.js",
+    "node_modules/@bagombeka/vuewind/lib-dist/vuewind.js",
   );
   const esm = await import(pathToFileURL(esmPath).href);
-  const cjs = requireFromConsumer("vuewind");
+  const cjs = requireFromConsumer("@bagombeka/vuewind");
   const records = await Promise.all(
     (await readdir("src/docs/content"))
       .filter((file) => file.endsWith(".js"))
@@ -121,11 +122,11 @@ try {
   const requireTypes = path.join(consumer, "requires.cts");
   await writeFile(
     importTypes,
-    `import {VwButton,VwInput,VwSwitch,VwIcon} from 'vuewind';\nimport {h} from 'vue';\nh(VwButton,{variant:'outline'});\nh(VwInput,{modelValue:'Hello',label:'Name'});\nh(VwSwitch,{modelValue:true,label:'Notifications'});\nh(VwIcon,{name:'wind',size:20});`,
+    `import {VwButton,VwInput,VwSwitch,VwIcon} from '@bagombeka/vuewind';\nimport {h} from 'vue';\nh(VwButton,{variant:'outline'});\nh(VwInput,{modelValue:'Hello',label:'Name'});\nh(VwSwitch,{modelValue:true,label:'Notifications'});\nh(VwIcon,{name:'wind',size:20});`,
   );
   await writeFile(
     requireTypes,
-    `import Vuewind = require('vuewind');\nconst button: typeof Vuewind.VwButton = Vuewind.VwButton;`,
+    `import Vuewind = require('@bagombeka/vuewind');\nconst button: typeof Vuewind.VwButton = Vuewind.VwButton;`,
   );
   const program = ts.createProgram([importTypes, requireTypes], {
     noEmit: true,
@@ -188,7 +189,7 @@ try {
   );
   await writeFile(
     path.join(consumer, "main.js"),
-    `${imports.join("\n")}\nimport {createApp,h} from 'vue';\nimport 'vuewind/style.css';\ncreateApp({render:()=>h('main',[${names.map((name) => `h(${name})`).join(",")}])}).mount('#app');`,
+    `${imports.join("\n")}\nimport {createApp,h} from 'vue';\nimport '@bagombeka/vuewind/style.css';\ncreateApp({render:()=>h('main',[${names.map((name) => `h(${name})`).join(",")}])}).mount('#app');`,
   );
   await build({
     root: consumer,
@@ -213,13 +214,14 @@ try {
   );
   const installed = JSON.parse(
     await readFile(
-      path.join(consumer, "node_modules/vuewind/package.json"),
+      path.join(consumer, "node_modules/@bagombeka/vuewind/package.json"),
       "utf8",
     ),
   );
   assert.equal(installed.version, pkg.version);
+  assert.equal(installed.name, pkg.name);
   console.log(
-    `Verified vuewind@${pkg.version}: ${paths.length} packed files, ${expected.length} ESM/CJS exports, both TypeScript declaration formats, SSR, CSS, and ${names.length} consumer examples.`,
+    `Verified @bagombeka/vuewind@${pkg.version}: ${paths.length} packed files, ${expected.length} ESM/CJS exports, both TypeScript declaration formats, SSR, CSS, and ${names.length} consumer examples.`,
   );
 } finally {
   await rm(temporary, { recursive: true, force: true });
