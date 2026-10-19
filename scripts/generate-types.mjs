@@ -35,6 +35,8 @@ for (const record of records) {
   }
   output += "}>\n\n";
 }
+output +=
+  "/** Decorative SVG helper used by the component examples. */\nexport declare const VwIcon: DefineComponent<{ name?: string; size?: string | number }>\n";
 output = await format(output, { parser: "typescript" });
 if (process.argv.includes("--check")) {
   const actual = await readFile("src/lib/index.d.ts", "utf8");

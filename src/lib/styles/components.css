@@ -1,3 +1,38 @@
+:where([class^="vw-"], [class*=" vw-"]),
+:where([class^="vw-"], [class*=" vw-"]) * {
+  box-sizing: border-box;
+}
+:where([class^="vw-"], [class*=" vw-"]) {
+  font-family: var(--vw-font);
+}
+:where(
+    .vw-card,
+    .vw-dialog,
+    .vw-alert,
+    .vw-toast,
+    .vw-stat,
+    .vw-empty,
+    .vw-popover,
+    .vw-tabs,
+    .vw-calendar
+  )
+  :where(h1, h2, h3, p, ul, ol) {
+  margin: 0;
+}
+:where([class^="vw-"], [class*=" vw-"]):focus-visible,
+:where([class^="vw-"], [class*=" vw-"])
+  :where(
+    button,
+    a,
+    input,
+    textarea,
+    select,
+    summary,
+    [tabindex]
+  ):focus-visible {
+  outline: 2px solid var(--vw-primary);
+  outline-offset: 3px;
+}
 .vw-button {
   display: inline-flex;
   align-items: center;

@@ -1,7 +1,6 @@
 {
   "name": "vuewind",
-  "version": "0.2.0",
-  "private": true,
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,50 +10,61 @@
     "serve": "serve dist -l 80",
     "lint": "eslint src/lib src/docs src/stores/theme.js src/stores/docs.js",
     "format": "prettier --write src/",
-    "build:lib": "vite build --config vite.lib.config.js",
+    "build:lib": "npm run types && vite build --config vite.lib.config.js",
     "test": "node --test tests/*.test.mjs",
     "test:browser": "node tests/browser.mjs",
     "format:new": "prettier --write src/lib src/docs src/stores/theme.js src/stores/docs.js tests",
     "types": "node scripts/generate-types.mjs",
-    "types:check": "node scripts/generate-types.mjs --check"
+    "types:check": "node scripts/generate-types.mjs --check",
+    "build:docs": "vite build",
+    "prepack": "npm run build:lib",
+    "test:package": "node scripts/test-package.mjs",
+    "release:check": "npm run types:check && npm test && npm run build:lib && npm run test:package",
+    "prepublishOnly": "npm run release:check"
   },
-  "dependencies": {
+  "devDependencies": {
+    "@rushstack/eslint-patch": "^1.3.3",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vitejs/plugin-vue-jsx": "^4.1.1",
+    "@vue/eslint-config-prettier": "^8.0.0",
+    "@vue/eslint-config-typescript": "^12.0.0",
     "@vueuse/core": "^10.7.1",
+    "autoprefixer": "^10.4.16",
     "axios": "^1.7.9",
     "dotenv": "^16.4.7",
+    "eslint": "^8.49.0",
+    "eslint-plugin-vue": "^9.17.0",
     "flatpickr": "^4.6.13",
     "js-cookie": "^3.0.5",
     "jsvectormap": "^1.5.3",
     "jwt-decode": "^4.0.0",
+    "npm-run-all2": "^6.1.1",
     "pinia": "^2.2.6",
+    "postcss": "^8.4.32",
+    "prettier": "^3.0.3",
+    "serve": "^14.2.4",
+    "tailwindcss": "^3.4.0",
+    "typescript": "5.8.3",
+    "vite": "^5.4.11",
     "vue": "^3.5.12",
     "vue-router": "^4.4.5",
     "vue3-apexcharts": "^1.4.4",
     "xlsx": "^0.18.5"
   },
-  "devDependencies": {
-    "@rushstack/eslint-patch": "^1.3.3",
-    "@vue/eslint-config-prettier": "^8.0.0",
-    "@vue/eslint-config-typescript": "^12.0.0",
-    "autoprefixer": "^10.4.16",
-    "eslint": "^8.49.0",
-    "eslint-plugin-vue": "^9.17.0",
-    "npm-run-all2": "^6.1.1",
-    "postcss": "^8.4.32",
-    "prettier": "^3.0.3",
-    "serve": "^14.2.4",
-    "tailwindcss": "^3.4.0",
-    "vite": "^5.4.11"
-  },
-  "description": "Thoughtful Vue components and an interactive documentation workspace",
+  "description": "60 themeable Vue 3 components with typed APIs and accessible native foundations",
   "exports": {
     ".": {
-      "types": "./lib-dist/index.d.ts",
-      "import": "./lib-dist/vuewind.js"
+      "import": {
+        "types": "./lib-dist/index.d.ts",
+        "default": "./lib-dist/vuewind.js"
+      },
+      "require": {
+        "types": "./lib-dist/index.d.cts",
+        "default": "./lib-dist/vuewind.cjs"
+      }
     },
-    "./style.css": "./lib-dist/style.css"
+    "./style.css": "./lib-dist/style.css",
+    "./package.json": "./package.json"
   },
   "files": [
     "lib-dist",
@@ -67,5 +77,33 @@
   "engines": {
     "node": ">=20.19.0"
   },
-  "types": "./lib-dist/index.d.ts"
+  "types": "./lib-dist/index.d.ts",
+  "license": "MIT",
+  "author": "Bagombeka Job",
+  "homepage": "https://vuewind-two.vercel.app/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BAGOMBEKA-JOB-DEV/vuewind.git"
+  },
+  "bugs": {
+    "url": "https://github.com/BAGOMBEKA-JOB-DEV/vuewind/issues"
+  },
+  "keywords": [
+    "vue",
+    "vue3",
+    "components",
+    "ui",
+    "design-system",
+    "vuewind"
+  ],
+  "main": "./lib-dist/vuewind.cjs",
+  "module": "./lib-dist/vuewind.js",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/",
+    "tag": "latest"
+  }
 }

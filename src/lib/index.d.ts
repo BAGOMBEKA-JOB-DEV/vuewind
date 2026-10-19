@@ -434,3 +434,9 @@ export declare const VwTooltip: DefineComponent<{
 export declare const VwVisuallyHidden: DefineComponent<{
   as?: string;
 }>;
+
+/** Decorative SVG helper used by the component examples. */
+export declare const VwIcon: DefineComponent<{
+  name?: string;
+  size?: string | number;
+}>;

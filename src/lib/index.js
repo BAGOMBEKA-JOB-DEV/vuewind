@@ -1,3 +1,4 @@
+export { default as VwIcon } from "./Icon.vue";
 export { default as VwButton } from "./components/VwButton.vue";
 export { default as VwIconButton } from "./components/VwIconButton.vue";
 export { default as VwBadge } from "./components/VwBadge.vue";
