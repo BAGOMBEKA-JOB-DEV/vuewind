@@ -46,7 +46,7 @@
     "vue3-apexcharts": "^1.4.4",
     "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
   },
-  "description": "60 themeable Vue 3 components with typed APIs and accessible native foundations",
+  "description": "A Vue 3 component library for building consistent application interfaces with typed APIs, customizable CSS tokens, light and dark themes, and native browser interactions.",
   "exports": {
     ".": {
       "import": {
