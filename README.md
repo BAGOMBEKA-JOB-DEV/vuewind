@@ -1,8 +1,18 @@
 # Vuewind
 
-60 thoughtful Vue 3 components with typed APIs, semantic themes, and native browser foundations.
+Vuewind is an open source Vue 3 component library for building consistent application interfaces. It brings reusable controls, typed APIs, and a shared visual system to forms, dashboards, navigation, and everyday application screens.
 
-[Documentation](https://vuewind-two.vercel.app/) · [Components](https://vuewind-two.vercel.app/components) · [GitHub](https://github.com/BAGOMBEKA-JOB-DEV/vuewind)
+[Documentation](https://vuewind-two.vercel.app/) · [Components](https://vuewind-two.vercel.app/components) · [npm](https://www.npmjs.com/package/@bagombeka/vuewind) · [GitHub](https://github.com/BAGOMBEKA-JOB-DEV/vuewind)
+
+## About Vuewind
+
+Vuewind provides a common foundation for interfaces that need to feel coherent as an application grows. Use its components to compose data entry flows, account settings, administrative workspaces, and product screens, with consistent colors, spacing, focus states, and interaction patterns.
+
+The APIs follow familiar Vue conventions: props configure behavior, events communicate changes, `v-model` connects form state, and slots make room for your content. Named imports let you choose the components your application needs. Vue remains a peer dependency, and the package includes JavaScript modules, TypeScript declarations, and a shared stylesheet.
+
+The visual system uses semantic CSS tokens, with light and dark palettes and configurable accent colors. You can adapt the appearance to your product through CSS variables. Components use native browser controls where practical, with keyboard interaction, visible focus, and reduced motion support built into the relevant patterns.
+
+The documentation is part of the project: working previews sit alongside copyable source, component API references, and guides for installation, theming, composition, and accessibility. Composed examples show how the individual pieces work together in application layouts.
 
 ## Install
 
@@ -86,7 +96,7 @@ npm run release:check    # Full package release validation
 npm pack                 # Build and create the publishable tarball
 ```
 
-`test:package` builds an isolated consumer from the actual npm tarball and uses the checkout's installed Vue peer without network access. It verifies ESM and CommonJS imports, SSR, styles, and all 60 examples using public package imports.
+`test:package` builds an isolated consumer from the actual npm tarball and uses the checkout's installed Vue peer without network access. It verifies ESM and CommonJS imports, SSR, styles, and the documented examples using public package imports.
 
 The browser check uses a local Chrome or Chromium executable. Set `BROWSER_BIN` if needed. Screenshots are saved to `test-results/`.
 
