@@ -112,6 +112,44 @@ jobs:
             exit 1
           fi
           npm publish "./artifacts/bagombeka-vuewind-${RELEASE_VERSION}.tgz" --ignore-scripts --access public --tag latest --provenance
+      - name: Wait for the public npm package
+        if: inputs.publish
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import { createHash } from 'node:crypto';
+          const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+          const archive = fs.readFileSync(`artifacts/bagombeka-vuewind-${process.env.RELEASE_VERSION}.tgz`);
+          const integrity = bytes => `sha512-${createHash('sha512').update(bytes).digest('base64')}`;
+          const expected = integrity(archive);
+          const deadline = Date.now() + 15 * 60 * 1000;
+          while (Date.now() < deadline) {
+            try {
+              const response = await fetch(`https://registry.npmjs.org/${encodeURIComponent(pkg.name)}`, {
+                cache: 'no-store', signal: AbortSignal.timeout(15000),
+              });
+              if (response.ok) {
+                const metadata = await response.json();
+                const version = metadata.versions?.[pkg.version];
+                if (version?.name === pkg.name && metadata['dist-tags']?.latest === pkg.version &&
+                    version.dist?.integrity === expected) {
+                  const tarball = await fetch(version.dist.tarball, {
+                    cache: 'no-store', signal: AbortSignal.timeout(15000),
+                  });
+                  if (tarball.ok && integrity(Buffer.from(await tarball.arrayBuffer())) === expected) {
+                    console.log(`Verified public ${pkg.name}@${pkg.version}, latest tag, and matching downloadable tarball.`);
+                    process.exit(0);
+                  }
+                }
+              }
+            } catch (error) {
+              console.log(`Registry check: ${error.message}`);
+            }
+            console.log('Waiting for npm processing and public registry availability.');
+            await new Promise(resolve => setTimeout(resolve, 20000));
+          }
+          throw new Error('npm accepted the upload, but public availability was not verified within 15 minutes. Check the registry before retrying; do not republish an accepted version.');
+          NODE
       - name: Create the GitHub release
         if: inputs.publish
         env:

@@ -23,9 +23,7 @@ import VwBadge from "../../lib/components/VwBadge.vue";
     <section class="changelog-entry">
       <div>
         <strong>v1.0.0</strong><small>October 19, 2026</small
-        ><VwBadge variant="success" style="margin-top: 12px"
-          >Release candidate</VwBadge
-        >
+        ><VwBadge variant="success" style="margin-top: 12px">Stable</VwBadge>
       </div>
       <div>
         <h2>A fresh foundation.</h2>
