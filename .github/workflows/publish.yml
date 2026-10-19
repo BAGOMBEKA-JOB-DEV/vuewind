@@ -1,0 +1,92 @@
+name: Publish Vuewind
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Exact version in package.json
+        required: true
+        default: "1.0.0"
+        type: string
+      publish:
+        description: Publish to npm and create the GitHub release (off means dry run)
+        required: true
+        default: false
+        type: boolean
+
+concurrency:
+  group: vuewind-npm-release
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      id-token: write
+    env:
+      RELEASE_VERSION: ${{ inputs.version }}
+      PUBLISH_REQUESTED: ${{ inputs.publish }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          package-manager-cache: false
+          registry-url: https://registry.npmjs.org
+      - name: Validate release version and destination
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+          if (pkg.name !== 'vuewind' || pkg.private || pkg.version !== process.env.RELEASE_VERSION) {
+            throw new Error('The requested version must match the public vuewind package.json version.');
+          }
+          if (!fs.existsSync(`docs/releases/${pkg.version}.md`)) {
+            throw new Error('Add version-specific release notes before running the release workflow.');
+          }
+          if (process.env.PUBLISH_REQUESTED === 'true' &&
+              (process.env.GITHUB_REF !== 'refs/heads/main' || process.env.GITHUB_REPOSITORY !== 'BAGOMBEKA-JOB-DEV/vuewind')) {
+            throw new Error('Publish from the main branch of BAGOMBEKA-JOB-DEV/vuewind after merging the release PR.');
+          }
+          NODE
+      - run: npm ci --ignore-scripts
+      - name: Validate the release and packed consumer
+        run: npm run release:check
+      - name: Build documentation
+        run: npm run build:docs
+      - name: Pack the verified package
+        run: |
+          mkdir -p artifacts
+          npm pack --ignore-scripts --pack-destination artifacts
+      - name: Preview publication
+        run: npm publish "artifacts/vuewind-${RELEASE_VERSION}.tgz" --dry-run --ignore-scripts --access public
+      - uses: actions/upload-artifact@v6
+        with:
+          name: vuewind-${{ inputs.version }}
+          path: artifacts/*.tgz
+          if-no-files-found: error
+      - name: Publish to npm (manual opt-in)
+        if: inputs.publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ -z "$NODE_AUTH_TOKEN" ]; then
+            echo "::error::Add an npm publish token as the repository Actions secret NPM_TOKEN before the first release."
+            exit 1
+          fi
+          npm publish "artifacts/vuewind-${RELEASE_VERSION}.tgz" --ignore-scripts --access public --tag latest --provenance
+      - name: Create the GitHub release
+        if: inputs.publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "v${RELEASE_VERSION}" "artifacts/vuewind-${RELEASE_VERSION}.tgz" \
+            --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+            --title "Vuewind ${RELEASE_VERSION}" --notes-file "docs/releases/${RELEASE_VERSION}.md"

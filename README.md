@@ -1,84 +1,100 @@
+# Vuewind
 
+60 thoughtful Vue 3 components with typed APIs, semantic themes, and native browser foundations.
 
----
+[Documentation](https://vuewind-two.vercel.app/) · [Components](https://vuewind-two.vercel.app/components) · [GitHub](https://github.com/BAGOMBEKA-JOB-DEV/vuewind)
 
-```markdown
-# VUEWIND
+## Install
 
-**Vuewind** is a component-rich UI library built using **Vue 3** and **Tailwind CSS**. It's designed to provide developers with a sleek, responsive, and easily customizable set of components that can plug seamlessly into any modern frontend project. Whether you're prototyping a dashboard, building a client portal, or crafting a full-scale application, Vuewind has your back.
-
-## ⚡️ Why Vuewind?
-
-- ✨ Built with **Vue 3 Composition API**
-- 🎨 Styled using **Tailwind CSS** for utility-first design
-- 🧩 Includes a diverse collection of reusable, accessible components
-- 🛠️ Designed to be extendable and modular—ideal for scaling
-- 📦 Intended to be distributed as a **Vue component library**
-
----
----
-
-## 🔧 Project Setup
-
-Install dependencies:
+In an existing Vue 3.5+ application:
 
 ```sh
-npm install
-````
+npm install vuewind
+```
 
-### 🚀 Run in Development
+Load the stylesheet once in your app entry:
 
-This compiles the project and starts a local development server with hot reload:
+```js
+import "vuewind/style.css";
+```
+
+Then import only the components you need:
+
+```vue
+<script setup>
+import { ref } from "vue";
+import { VwButton, VwInput } from "vuewind";
+const name = ref("");
+</script>
+
+<template>
+  <VwInput v-model="name" label="Workspace name" />
+  <VwButton @click="name = ''">Reset</VwButton>
+</template>
+```
+
+Vue is a peer dependency. Tailwind and the documentation dependencies are not required in consuming apps. ESM, CommonJS, TypeScript declarations, and `vuewind/style.css` are included. CSS is marked as a side effect so production bundlers preserve it.
+
+Version 1.0.0 is prepared for its first manual npm release. The install command becomes available after publication. See [the release guide](docs/RELEASING.md) for the maintainer steps.
+
+## Components and theming
+
+The collection covers actions, forms, data display, navigation, feedback, overlays, and layout. A `VwIcon` helper is also exported for use in composed examples.
+
+Components use standard Vue slots, props, and v-model events. Override semantic `--vw-*` CSS variables to customize colors and radius. Add the `dark` class to your document root for the dark palette. No global plugin registration is required.
+
+```css
+:root {
+  --vw-primary: #3566bd;
+  --vw-primary-hover: #28539e;
+  --vw-primary-soft: #ecf1fc;
+}
+```
+
+Controls prefer native browser elements. Modal overlays use native dialog focus containment. Calendar and DropdownMenu use native button/disclosure semantics rather than claiming full ARIA grid/menu implementations. Verify accessibility in your application.
+
+## Work on the repository
+
+Use Node.js 20.19+ and npm. This runs the documentation app, separate from installing the package in another app:
 
 ```sh
+git clone https://github.com/BAGOMBEKA-JOB-DEV/vuewind.git
+cd vuewind
+npm ci
 npm run dev
 ```
 
-### 📦 Build for Production
-
-Optimized build, ready to be bundled or deployed:
-
-```sh
-npm run build
-```
-
-### 🧹 Lint the Code
-
-Lint your code using ESLint to keep it clean and consistent:
+| Path               | Purpose                                                 |
+| ------------------ | ------------------------------------------------------- |
+| `src/lib`          | Public components, exports, semantic tokens, and styles |
+| `src/docs`         | Documentation workspace, guides, and live examples      |
+| `src/docs/content` | Component API and interaction records                   |
+| `src/components`   | Original dashboard source, retained for migration       |
+| `scripts`          | Type generation and installed-package verification      |
+| `tests`            | Contract, compilation, SSR, and browser checks          |
 
 ```sh
-npm run lint
+npm test                 # Component contracts, imports, SSR, and helpers
+npm run build            # Documentation app → dist/ (existing Vercel build)
+npm run build:lib        # ESM, CommonJS, CSS, and declarations → lib-dist/
+npm run test:package     # Install the built tarball and compile all examples
+npm run test:browser     # Keyboard, forms, themes, responsive layouts
+npm run release:check    # Full package release validation
+npm pack                 # Build and create the publishable tarball
 ```
 
----
+`test:package` builds an isolated consumer from the actual npm tarball and uses the checkout's installed Vue peer without network access. It verifies ESM and CommonJS imports, SSR, styles, and all 60 examples using public package imports.
 
-## 📚 Using Vuewind as a Library (Coming Soon)
+The browser check uses a local Chrome or Chromium executable. Set `BROWSER_BIN` if needed. Screenshots are saved to `test-results/`.
 
-Vuewind will soon be available as an installable package that can be added to your Vue projects. Stay tuned for:
+## Manual releases and documentation deployment
 
-* `npm install vuewind`
-* Component usage docs
-* Theme customization guide
-* Tree-shaking support
+Maintainers publish manually through **Actions → Publish Vuewind → Run workflow** after merging into `main`. The first publication needs the repository Actions secret `NPM_TOKEN`. The default workflow run validates and uploads an artifact; enabling `publish` sends that verified tarball to npm and creates the GitHub release. Pushes and PRs never publish packages.
 
+The existing Vercel integration deploys https://vuewind-two.vercel.app/ after merge. No separate deployment workflow or hosting migration is introduced.
 
-## ❤️ Contributing
+See [release instructions](docs/RELEASING.md), [1.0.0 release notes](docs/releases/1.0.0.md), [contribution guidance](CONTRIBUTING.md), and [redesign research](docs/redesign-research.md).
 
-Have an idea or need a new component? Contributions are welcome! You can:
+## License
 
-* Fork the repo
-* Add a new component or feature
-* Create a pull request
-
-Let’s build something beautiful and reusable for the Vue community.
-
----
-
-## 📃 License
-
-MIT © 2025
-Crafted  by [ BAGOMBEKA JOB](#)
-
-```
-=======
-# vuewind
+MIT. Created by Bagombeka Job and contributors.
