@@ -1,0 +1,59 @@
+:root {
+  color-scheme: light;
+  --vw-bg: #fafbf9;
+  --vw-surface: #ffffff;
+  --vw-soft: #f1f3ef;
+  --vw-hover: #f4f5f2;
+  --vw-text: #202820;
+  --vw-muted: #697268;
+  --vw-subtle: #8b9389;
+  --vw-border: #e4e8e0;
+  --vw-primary: #177551;
+  --vw-primary-hover: #105c3e;
+  --vw-primary-soft: #eaf4ed;
+  --vw-on-primary: #ffffff;
+  --vw-danger: #c63e3e;
+  --vw-warning: #94651b;
+  --vw-radius: 9px;
+  --vw-shadow: 0 4px 20px #182c1807, 0 1px 3px #182c1805;
+  --vw-font:
+    "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+.dark {
+  color-scheme: dark;
+  --vw-bg: #141815;
+  --vw-surface: #1a201b;
+  --vw-soft: #252c26;
+  --vw-hover: #222923;
+  --vw-text: #edf1ea;
+  --vw-muted: #a1ad9f;
+  --vw-subtle: #758372;
+  --vw-border: #323c32;
+  --vw-primary: #76d6a1;
+  --vw-primary-hover: #a1e7bb;
+  --vw-primary-soft: #203b2a;
+  --vw-on-primary: #12271a;
+  --vw-danger: #ff9b9b;
+  --vw-warning: #e3bd78;
+  --vw-shadow: 0 4px 20px #0002;
+}
+:root[data-accent="blue"] {
+  --vw-primary: #3566bd;
+  --vw-primary-hover: #28539e;
+  --vw-primary-soft: #ecf1fc;
+}
+:root[data-accent="violet"] {
+  --vw-primary: #7854b8;
+  --vw-primary-hover: #64439e;
+  --vw-primary-soft: #f1edf8;
+}
+.dark[data-accent="blue"] {
+  --vw-primary: #90b7ff;
+  --vw-primary-hover: #bbd2ff;
+  --vw-primary-soft: #25324c;
+}
+.dark[data-accent="violet"] {
+  --vw-primary: #c6acff;
+  --vw-primary-hover: #dac9ff;
+  --vw-primary-soft: #332742;
+}
