@@ -81,7 +81,7 @@ jobs:
           npm pack --ignore-scripts --pack-destination artifacts
       - name: Preview publication
         run: npm publish "./artifacts/bagombeka-vuewind-${RELEASE_VERSION}.tgz" --dry-run --ignore-scripts --access public
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         with:
           name: bagombeka-vuewind-${{ inputs.version }}
           path: artifacts/*.tgz
@@ -98,7 +98,7 @@ jobs:
           npm stage publish "./artifacts/bagombeka-vuewind-${RELEASE_VERSION}.tgz" --ignore-scripts --access public --tag latest --provenance --json > artifacts/staged-release.json
           cat artifacts/staged-release.json
           echo "Staged @bagombeka/vuewind@${RELEASE_VERSION}. Approve the package on npm with your account's 2FA to make it publicly installable." >> "$GITHUB_STEP_SUMMARY"
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         if: inputs.stage
         with:
           name: bagombeka-vuewind-${{ inputs.version }}-staging
