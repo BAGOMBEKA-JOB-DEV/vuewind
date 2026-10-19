@@ -29,7 +29,7 @@
     "@vitejs/plugin-vue": "^6.0.10",
     "@vitejs/plugin-vue-jsx": "^5.1.6",
     "@vue/eslint-config-prettier": "^10.2.0",
-    "@vueuse/core": "^10.7.1",
+    "@vueuse/core": "^15.0.0",
     "dotenv": "^16.4.7",
     "eslint": "^10.13.0",
     "eslint-plugin-vue": "^10.11.1",
