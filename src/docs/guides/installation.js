@@ -10,10 +10,17 @@ export default {
     {
       id: "install",
       title: "Add Vuewind to your project.",
-      body: "Install the public package from npm. Vue is a peer dependency, so your application keeps control of its Vue runtime.",
+      body: "After registry publication, install Vuewind with the command below. Vue is a peer dependency, so your application keeps control of its Vue runtime.",
       code: "npm install vuewind",
       language: "shell",
-      note: "Version 1.0.0 is awaiting npm account approval. Until publication is complete, install the verified package archive from the GitHub release; npm's staging placeholder does not contain Vuewind.",
+      note: "npm currently blocks the name vuewind because it is too similar to vue-wind. While registry publication is blocked, install the verified package archive from the GitHub release.",
+    },
+    {
+      id: "release-archive",
+      title: "Use the verified release archive today.",
+      body: "Install version 1.0.0 directly from the public GitHub prerelease while npm publication is blocked. The package keeps the name vuewind, so the imports below work with this installation.",
+      code: "npm install https://github.com/BAGOMBEKA-JOB-DEV/vuewind/releases/download/v1.0.0/vuewind-1.0.0.tgz",
+      language: "shell",
     },
     {
       id: "styles",
