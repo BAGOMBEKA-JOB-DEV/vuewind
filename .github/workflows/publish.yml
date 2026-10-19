@@ -38,7 +38,7 @@ jobs:
       PUBLISH_REQUESTED: ${{ inputs.publish }}
       STAGE_REQUESTED: ${{ inputs.stage }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
       - uses: actions/setup-node@v6
