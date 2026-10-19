@@ -66,7 +66,7 @@ jobs:
           mkdir -p artifacts
           npm pack --ignore-scripts --pack-destination artifacts
       - name: Preview publication
-        run: npm publish "artifacts/vuewind-${RELEASE_VERSION}.tgz" --dry-run --ignore-scripts --access public
+        run: npm publish "./artifacts/vuewind-${RELEASE_VERSION}.tgz" --dry-run --ignore-scripts --access public
       - uses: actions/upload-artifact@v6
         with:
           name: vuewind-${{ inputs.version }}
@@ -81,12 +81,20 @@ jobs:
             echo "::error::Add an npm publish token as the repository Actions secret NPM_TOKEN before the first release."
             exit 1
           fi
-          npm publish "artifacts/vuewind-${RELEASE_VERSION}.tgz" --ignore-scripts --access public --tag latest --provenance
+          npm publish "./artifacts/vuewind-${RELEASE_VERSION}.tgz" --ignore-scripts --access public --tag latest --provenance
       - name: Create the GitHub release
         if: inputs.publish
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "v${RELEASE_VERSION}" "artifacts/vuewind-${RELEASE_VERSION}.tgz" \
-            --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
-            --title "Vuewind ${RELEASE_VERSION}" --notes-file "docs/releases/${RELEASE_VERSION}.md"
+          if gh release view "v${RELEASE_VERSION}" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release upload "v${RELEASE_VERSION}" "./artifacts/vuewind-${RELEASE_VERSION}.tgz" \
+              --repo "$GITHUB_REPOSITORY" --clobber
+            gh release edit "v${RELEASE_VERSION}" --repo "$GITHUB_REPOSITORY" \
+              --draft=false --prerelease=false --latest \
+              --title "Vuewind ${RELEASE_VERSION}" --notes-file "docs/releases/${RELEASE_VERSION}.md"
+          else
+            gh release create "v${RELEASE_VERSION}" "./artifacts/vuewind-${RELEASE_VERSION}.tgz" \
+              --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+              --title "Vuewind ${RELEASE_VERSION}" --notes-file "docs/releases/${RELEASE_VERSION}.md"
+          fi
