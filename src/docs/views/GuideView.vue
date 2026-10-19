@@ -29,7 +29,7 @@ const toc = computed(
           ><span>/</span><span>{{ guide.title }}</span>
         </div>
         <a
-          :href="`https://github.com/BAGOMBEKA-JOB-DEV/vuewind/blob/redesign/vuewind-docs-v2/src/docs/guides/${route.params.slug}.js`"
+          :href="`https://github.com/BAGOMBEKA-JOB-DEV/vuewind/blob/main/src/docs/guides/${route.params.slug}.js`"
           target="_blank"
           rel="noopener noreferrer"
           class="page-source"

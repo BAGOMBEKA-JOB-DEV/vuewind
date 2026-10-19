@@ -24,8 +24,7 @@ const people = [
   { name: "Priya Patel" },
   { name: "Daniel Lee" },
 ];
-const quickStartCode =
-  "git clone https://github.com/BAGOMBEKA-JOB-DEV/vuewind.git\ncd vuewind\ngit checkout redesign/vuewind-docs-v2\nnpm install\nnpm run dev";
+const quickStartCode = "npm install vuewind";
 const toc = [
   { id: "overview", label: "Overview" },
   { id: "the-collection", label: "The collection" },
@@ -51,7 +50,7 @@ function subscribe() {
           ><span>Introduction</span>
         </div>
         <a
-          href="https://github.com/BAGOMBEKA-JOB-DEV/vuewind/tree/redesign/vuewind-docs-v2"
+          href="https://github.com/BAGOMBEKA-JOB-DEV/vuewind/tree/main"
           target="_blank"
           rel="noopener noreferrer"
           class="page-source"
@@ -92,7 +91,7 @@ function subscribe() {
                 <path fill="#42b883" d="M0 0h5l7 12L19 0h5L12 21z" />
                 <path fill="#35495e" d="M5 0h4l3 5 3-5h4l-7 12z" /></svg
               >Vue 3</span
-            ><i /><span><Icon name="wind" :size="14" />Tailwind CSS</span
+            ><i /><span><Icon name="wind" :size="14" />CSS tokens</span
             ><i /><span><Icon name="shield" :size="13" />MIT licensed</span>
           </div>
         </div>
@@ -326,8 +325,8 @@ function subscribe() {
           <div class="eyebrow">FROM IDEA TO INTERFACE</div>
           <h2 class="section-heading">Your next chapter starts here.</h2>
           <p class="section-description">
-            Clone the repo, install dependencies, and start exploring. No
-            account. No unnecessary setup.
+            Install Vuewind, import vuewind/style.css in your app entry, and
+            start composing.
           </p>
           <RouterLink to="/docs/installation" class="text-link"
             >Read the installation guide <Icon name="right" :size="14"

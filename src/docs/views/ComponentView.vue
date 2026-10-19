@@ -43,7 +43,7 @@ const toc = [
           ><span>/</span><span>{{ component.name }}</span>
         </div>
         <a
-          :href="`https://github.com/BAGOMBEKA-JOB-DEV/vuewind/blob/redesign/vuewind-docs-v2/src/lib/components/Vw${component.name}.vue`"
+          :href="`https://github.com/BAGOMBEKA-JOB-DEV/vuewind/blob/main/src/lib/components/Vw${component.name}.vue`"
           target="_blank"
           rel="noopener noreferrer"
           class="page-source"
@@ -78,7 +78,7 @@ const toc = [
         <h2 class="section-heading">Make it yours.</h2>
         <p class="section-description">{{ component.notes }}</p>
         <CodeBlock
-          :code="`import { Vw${component.name} } from '@/lib'\nimport '@/lib/styles/tokens.css'\nimport '@/lib/styles/components.css'`"
+          :code="`import { Vw${component.name} } from 'vuewind'\nimport 'vuewind/style.css'`"
           language="js"
           title="Import into your project"
         />

@@ -17,7 +17,7 @@ const theme = useThemeStore();
         @click="docs.mobileOpen = !docs.mobileOpen"
       >
         <Icon name="menu" /></button
-      ><Logo /><span class="version-tag">v0.2</span>
+      ><Logo /><span class="version-tag">v1.0</span>
     </div>
     <nav class="header-nav" aria-label="Primary navigation">
       <RouterLink

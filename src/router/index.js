@@ -71,7 +71,11 @@ router.afterEach((to) => {
       : to.name === "guide"
         ? guides.find((g) => g.slug === to.params.slug)?.name
         : to.meta.title;
-  if (typeof document !== "undefined")
+  if (typeof document !== "undefined") {
     document.title = `${title || "Page not found"} — Vuewind`;
+    const canonical = document.querySelector('link[rel="canonical"]');
+    if (canonical)
+      canonical.href = new URL(to.path, "https://vuewind-two.vercel.app/").href;
+  }
 });
 export default router;

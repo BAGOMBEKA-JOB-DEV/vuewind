@@ -22,17 +22,17 @@ import VwBadge from "../../lib/components/VwBadge.vue";
     </div>
     <section class="changelog-entry">
       <div>
-        <strong>v0.2.0</strong><small>October 19, 2026</small
+        <strong>v1.0.0</strong><small>October 19, 2026</small
         ><VwBadge variant="success" style="margin-top: 12px"
-          >Development</VwBadge
+          >Release candidate</VwBadge
         >
       </div>
       <div>
         <h2>A fresh foundation.</h2>
         <p>
           A complete redesign of the documentation experience, paired with a new
-          library of 60 Vue components. This development version is available
-          from the redesign branch.
+          library of 60 Vue components. Version 1.0.0 is prepared for manual npm
+          publication from the repository after the release PR is merged.
         </p>
         <ul>
           <li>
@@ -56,6 +56,15 @@ import VwBadge from "../../lib/components/VwBadge.vue";
             Separate documentation and library builds, with automated
             validation.
           </li>
+          <li>
+            Install with npm install vuewind after publication. ESM, CommonJS,
+            types, and the shared stylesheet are included.
+          </li>
+          <li>
+            A manual GitHub Actions release workflow publishes the verified
+            package. Documentation deploys through the existing Vercel
+            integration after merge.
+          </li>
         </ul>
         <RouterLink to="/docs/migration" class="text-link"
           >Read the migration guide <Icon name="right" :size="13"
@@ -77,7 +86,7 @@ import VwBadge from "../../lib/components/VwBadge.vue";
     <footer class="docs-footer">
       <span>Built in the open. Made to keep getting better.</span
       ><a
-        href="https://github.com/BAGOMBEKA-JOB-DEV/vuewind/commits/redesign/vuewind-docs-v2"
+        href="https://github.com/BAGOMBEKA-JOB-DEV/vuewind/commits/main"
         target="_blank"
         rel="noopener noreferrer"
         >Follow the commits <Icon name="arrow" :size="12"
