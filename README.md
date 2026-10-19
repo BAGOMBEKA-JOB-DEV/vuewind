@@ -9,13 +9,15 @@
 In an existing Vue 3.5+ application:
 
 ```sh
-npm install vuewind
+npm install @bagombeka/vuewind
 ```
+
+The public package uses the `@bagombeka` scope. Use `@bagombeka/vuewind` in your imports as shown below.
 
 Load the stylesheet once in your app entry:
 
 ```js
-import "vuewind/style.css";
+import "@bagombeka/vuewind/style.css";
 ```
 
 Then import only the components you need:
@@ -23,7 +25,7 @@ Then import only the components you need:
 ```vue
 <script setup>
 import { ref } from "vue";
-import { VwButton, VwInput } from "vuewind";
+import { VwButton, VwInput } from "@bagombeka/vuewind";
 const name = ref("");
 </script>
 
@@ -33,7 +35,7 @@ const name = ref("");
 </template>
 ```
 
-Vue is a peer dependency. Tailwind and the documentation dependencies are not required in consuming apps. ESM, CommonJS, TypeScript declarations, and `vuewind/style.css` are included. CSS is marked as a side effect so production bundlers preserve it.
+Vue is a peer dependency. Tailwind and the documentation dependencies are not required in consuming apps. ESM, CommonJS, TypeScript declarations, and `@bagombeka/vuewind/style.css` are included. CSS is marked as a side effect so production bundlers preserve it.
 
 ## Components and theming
 

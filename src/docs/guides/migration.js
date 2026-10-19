@@ -23,7 +23,7 @@ export default {
       id: "styles",
       title: "Bring the new tokens with you.",
       body: "Import the library token and component styles once. Legacy dashboard styles remain available at src/assets/css/style.css, but are no longer loaded by the documentation app.",
-      code: "import 'vuewind/style.css'",
+      code: "import '@bagombeka/vuewind/style.css'",
       language: "js",
     },
     {

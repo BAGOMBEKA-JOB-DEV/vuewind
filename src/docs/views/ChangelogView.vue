@@ -31,8 +31,8 @@ import VwBadge from "../../lib/components/VwBadge.vue";
         <h2>A fresh foundation.</h2>
         <p>
           A complete redesign of the documentation experience, paired with a new
-          library of 60 Vue components. Version 1.0.0 is prepared for manual npm
-          publication from the repository after the release PR is merged.
+          library of 60 Vue components. The public package is
+          @bagombeka/vuewind, with manual publication from the repository.
         </p>
         <ul>
           <li>
@@ -57,8 +57,8 @@ import VwBadge from "../../lib/components/VwBadge.vue";
             validation.
           </li>
           <li>
-            Install with npm install vuewind after publication. ESM, CommonJS,
-            types, and the shared stylesheet are included.
+            Install with npm install @bagombeka/vuewind. ESM, CommonJS, types,
+            and the shared stylesheet are included.
           </li>
           <li>
             A manual GitHub Actions release workflow publishes the verified

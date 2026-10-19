@@ -1,6 +1,6 @@
 # npm package name review request
 
-Status: draft, awaiting submission.
+Status: archived draft, not submitted. The maintainer selected the public scoped name `@bagombeka/vuewind` instead. No registry name review is required for the selected release path. The text below records the earlier unscoped-name investigation.
 
 Submit through [npm Support](https://www.npmjs.com/support) while signed in to the npm account `bagombeka`. The request concerns a registry publishing restriction. The registry operator decides whether an exception is available.
 

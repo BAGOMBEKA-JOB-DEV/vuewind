@@ -51,8 +51,8 @@ jobs:
           node --input-type=module <<'NODE'
           import fs from 'node:fs';
           const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
-          if (pkg.name !== 'vuewind' || pkg.private || pkg.version !== process.env.RELEASE_VERSION) {
-            throw new Error('The requested version must match the public vuewind package.json version.');
+          if (pkg.name !== '@bagombeka/vuewind' || pkg.private || pkg.version !== process.env.RELEASE_VERSION) {
+            throw new Error('The requested version must match the public @bagombeka/vuewind package.json version.');
           }
           if (!fs.existsSync(`docs/releases/${pkg.version}.md`)) {
             throw new Error('Add version-specific release notes before running the release workflow.');
@@ -78,10 +78,10 @@ jobs:
           mkdir -p artifacts
           npm pack --ignore-scripts --pack-destination artifacts
       - name: Preview publication
-        run: npm publish "./artifacts/vuewind-${RELEASE_VERSION}.tgz" --dry-run --ignore-scripts --access public
+        run: npm publish "./artifacts/bagombeka-vuewind-${RELEASE_VERSION}.tgz" --dry-run --ignore-scripts --access public
       - uses: actions/upload-artifact@v6
         with:
-          name: vuewind-${{ inputs.version }}
+          name: bagombeka-vuewind-${{ inputs.version }}
           path: artifacts/*.tgz
           if-no-files-found: error
       - name: Stage on npm for account approval
@@ -93,13 +93,13 @@ jobs:
             echo "::error::Add a write-enabled npm token as the repository Actions secret NPM_TOKEN."
             exit 1
           fi
-          npm stage publish "./artifacts/vuewind-${RELEASE_VERSION}.tgz" --ignore-scripts --access public --tag latest --provenance --json > artifacts/staged-release.json
+          npm stage publish "./artifacts/bagombeka-vuewind-${RELEASE_VERSION}.tgz" --ignore-scripts --access public --tag latest --provenance --json > artifacts/staged-release.json
           cat artifacts/staged-release.json
-          echo "Staged vuewind@${RELEASE_VERSION}. Approve the package on npm with your account's 2FA to make it publicly installable." >> "$GITHUB_STEP_SUMMARY"
+          echo "Staged @bagombeka/vuewind@${RELEASE_VERSION}. Approve the package on npm with your account's 2FA to make it publicly installable." >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v6
         if: inputs.stage
         with:
-          name: vuewind-${{ inputs.version }}-staging
+          name: bagombeka-vuewind-${{ inputs.version }}-staging
           path: artifacts/staged-release.json
           if-no-files-found: error
       - name: Publish to npm (manual opt-in)
@@ -111,20 +111,20 @@ jobs:
             echo "::error::Add an npm publish token as the repository Actions secret NPM_TOKEN before the first release."
             exit 1
           fi
-          npm publish "./artifacts/vuewind-${RELEASE_VERSION}.tgz" --ignore-scripts --access public --tag latest --provenance
+          npm publish "./artifacts/bagombeka-vuewind-${RELEASE_VERSION}.tgz" --ignore-scripts --access public --tag latest --provenance
       - name: Create the GitHub release
         if: inputs.publish
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           if gh release view "v${RELEASE_VERSION}" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
-            gh release upload "v${RELEASE_VERSION}" "./artifacts/vuewind-${RELEASE_VERSION}.tgz" \
+            gh release upload "v${RELEASE_VERSION}" "./artifacts/bagombeka-vuewind-${RELEASE_VERSION}.tgz" \
               --repo "$GITHUB_REPOSITORY" --clobber
             gh release edit "v${RELEASE_VERSION}" --repo "$GITHUB_REPOSITORY" \
               --draft=false --prerelease=false --latest \
               --title "Vuewind ${RELEASE_VERSION}" --notes-file "docs/releases/${RELEASE_VERSION}.md"
           else
-            gh release create "v${RELEASE_VERSION}" "./artifacts/vuewind-${RELEASE_VERSION}.tgz" \
+            gh release create "v${RELEASE_VERSION}" "./artifacts/bagombeka-vuewind-${RELEASE_VERSION}.tgz" \
               --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
               --title "Vuewind ${RELEASE_VERSION}" --notes-file "docs/releases/${RELEASE_VERSION}.md"
           fi

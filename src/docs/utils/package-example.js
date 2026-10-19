@@ -4,10 +4,10 @@ export function packageExample(source) {
     .replace(
       /import\s+(\w+)\s+from\s+["']\.\.\/\.\.\/lib\/components\/(Vw\w+)\.vue["'];?/g,
       (_, local, exported) =>
-        `import { ${exported}${local === exported ? "" : ` as ${local}`} } from 'vuewind';`,
+        `import { ${exported}${local === exported ? "" : ` as ${local}`} } from '@bagombeka/vuewind';`,
     )
     .replace(
       /import\s+(\w+)\s+from\s+["']\.\.\/\.\.\/lib\/Icon\.vue["'];?/g,
-      (_, local) => `import { VwIcon as ${local} } from 'vuewind';`,
+      (_, local) => `import { VwIcon as ${local} } from '@bagombeka/vuewind';`,
     );
 }

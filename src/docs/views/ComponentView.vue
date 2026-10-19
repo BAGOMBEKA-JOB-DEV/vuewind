@@ -78,7 +78,7 @@ const toc = [
         <h2 class="section-heading">Make it yours.</h2>
         <p class="section-description">{{ component.notes }}</p>
         <CodeBlock
-          :code="`import { Vw${component.name} } from 'vuewind'\nimport 'vuewind/style.css'`"
+          :code="`import { Vw${component.name} } from '@bagombeka/vuewind'\nimport '@bagombeka/vuewind/style.css'`"
           language="js"
           title="Import into your project"
         />
