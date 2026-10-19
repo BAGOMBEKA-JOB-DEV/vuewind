@@ -1,10 +1,29 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <link rel="icon" href="./src/assets/images/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vuewind</title>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="60 thoughtfully crafted Vue components. Beautiful defaults, semantic themes, live examples, and room to make them yours."
+    />
+    <meta name="theme-color" content="#fafbf9" />
+    <title>Introduction — Vuewind</title>
+    <script>
+      try {
+        const mode = localStorage.getItem("vuewind-theme");
+        const accent = localStorage.getItem("vuewind-accent");
+        document.documentElement.classList.toggle(
+          "dark",
+          mode === "dark" ||
+            (mode === "system" &&
+              matchMedia("(prefers-color-scheme: dark)").matches),
+        );
+        if (["green", "blue", "violet"].includes(accent))
+          document.documentElement.dataset.accent = accent;
+      } catch {}
+    </script>
   </head>
   <body>
     <div id="app"></div>
