@@ -1,5 +1,4 @@
 <script setup>
-import { computed } from "vue";
 import { clamp, pageRange } from "../utils/numbers.js";
 defineProps({
   modelValue: { type: Number, default: 1 },

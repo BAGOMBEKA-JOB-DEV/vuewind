@@ -6,7 +6,7 @@
 
 ## Install
 
-In an existing Vue 3.5+ application:
+In an existing Vue 3.5.42+ application:
 
 ```sh
 npm install @bagombeka/vuewind
@@ -37,6 +37,8 @@ const name = ref("");
 
 Vue is a peer dependency. Tailwind and the documentation dependencies are not required in consuming apps. ESM, CommonJS, TypeScript declarations, and `@bagombeka/vuewind/style.css` are included. CSS is marked as a side effect so production bundlers preserve it.
 
+Vuewind adds no production dependencies. `npm audit` checks the complete application where you run it, including its existing development tools. See [dependency security](docs/security.md) for the audit scope and maintenance checks.
+
 ## Components and theming
 
 The collection covers actions, forms, data display, navigation, feedback, overlays, and layout. A `VwIcon` helper is also exported for use in composed examples.
@@ -55,7 +57,7 @@ Controls prefer native browser elements. Modal overlays use native dialog focus 
 
 ## Work on the repository
 
-Use Node.js 20.19+ and npm. This runs the documentation app, separate from installing the package in another app:
+Use Node.js 22.13+ or a current Node.js LTS release, and npm. This runs the documentation app, separate from installing the package in another app:
 
 ```sh
 git clone https://github.com/BAGOMBEKA-JOB-DEV/vuewind.git
@@ -74,6 +76,7 @@ npm run dev
 | `tests`            | Contract, compilation, SSR, and browser checks          |
 
 ```sh
+npm run audit            # Known dependency vulnerabilities, including development tools
 npm test                 # Component contracts, imports, SSR, and helpers
 npm run build            # Documentation app → dist/ (existing Vercel build)
 npm run build:lib        # ESM, CommonJS, CSS, and declarations → lib-dist/

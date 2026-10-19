@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readdir } from "node:fs/promises";
 import { createServer } from "vite";
-import { createSSRApp } from "vue";
+import { createSSRApp, h } from "vue";
 import { renderToString } from "@vue/server-renderer";
 
 test("all runnable examples render without browser globals or Vue warnings", async (t) => {
@@ -27,6 +27,25 @@ test("all runnable examples render without browser globals or Vue warnings", asy
         assert.deepEqual(warnings, []);
       });
     }
+    await t.test(
+      "SSR rejects carriage-return attribute injection and escapes labels",
+      async () => {
+        const { default: VwInput } = await server.ssrLoadModule(
+          "/src/lib/components/VwInput.vue",
+        );
+        const app = createSSRApp({
+          render: () =>
+            h(VwInput, {
+              label: '<img src=x onerror="security-probe">',
+              "x\rautofocus\ronfocus": "security-probe",
+            }),
+        });
+        app.config.warnHandler = () => {};
+        const html = await renderToString(app);
+        assert.doesNotMatch(html, /autofocus|onfocus|<img/);
+        assert.match(html, /&lt;img/);
+      },
+    );
   } finally {
     await server.close();
   }

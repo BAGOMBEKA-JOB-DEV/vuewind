@@ -6,19 +6,19 @@ The public package is `@bagombeka/vuewind`. Consumers install it with `npm insta
 
 npm rejected the unscoped name `vuewind` because it conflicts with the existing package `vue-wind`. The maintainer selected `@bagombeka/vuewind` for the first release. The earlier [name-review draft](npm-name-review-request.md) was not submitted and is retained only as historical context. Publication no longer depends on an exception for the unscoped name.
 
-## First release
+## Publish a release
 
 1. Merge the scoped release PR into `main`. This also updates the documentation through the existing Vercel integration at https://vuewind-two.vercel.app/.
 2. Publish using the npm account `bagombeka`, which owns the `@bagombeka` user scope.
 3. Configure a granular npm token with **Read and write (publish and stage)** access to the package and **Bypass 2FA** enabled for direct CI publication. A stage-only token can create a package through staged publishing, which requires a maintainer's 2FA approval before installation is available.
 4. Save the token as the repository Actions secret **NPM_TOKEN** in **BAGOMBEKA-JOB-DEV/vuewind → Settings → Secrets and variables → Actions**. Never commit it or include it in release notes. The publishing credential is already configured.
-5. Open **Actions → Publish Vuewind → Run workflow**. Select **main**, keep version **1.0.0**, and leave both **publish** and **stage** off for a dry run.
-6. Inspect the validation result and downloadable `bagombeka-vuewind-1.0.0` artifact. The workflow installs the actual scoped tarball into an isolated consumer and checks its imports, types, styles, and all 60 examples.
-7. Run the workflow with **publish** enabled. It uploads `bagombeka-vuewind-1.0.0.tgz` publicly with `latest` and provenance, waits for the public version and matching downloadable tarball, then creates or finalizes GitHub release `v1.0.0` with the same tarball attached. npm scans uploads before they become installable; the workflow allows up to 15 minutes for availability.
+5. Open **Actions → Publish Vuewind → Run workflow**. Select **main**, keep version **1.0.1**, and leave both **publish** and **stage** off for a dry run.
+6. Inspect the validation result and downloadable `bagombeka-vuewind-1.0.1` artifact. The workflow installs the actual scoped tarball into an isolated consumer and checks its imports, types, styles, and all 60 examples.
+7. Run the workflow with **publish** enabled. It uploads `bagombeka-vuewind-1.0.1.tgz` publicly with `latest` and provenance, waits for the public version and matching downloadable tarball, then creates or finalizes GitHub release `v1.0.1` with the same tarball attached. npm scans uploads before they become installable; the workflow allows up to 15 minutes for availability.
 8. Verify the public registry and a fresh application installation:
 
 ```sh
-npm view @bagombeka/vuewind@1.0.0 version
+npm view @bagombeka/vuewind@1.0.1 version
 npm view @bagombeka/vuewind dist-tags.latest
 npm install @bagombeka/vuewind
 ```
@@ -56,6 +56,6 @@ Update `package.json` and the lockfile together, add `docs/releases/<version>.md
 
 If npm accepts the upload but availability verification times out, check the public registry and the account's package status before taking another action. Scanning may take longer than 15 minutes. Do not rerun publication for an accepted version. If npm publication succeeds but GitHub release creation fails, finalize GitHub for the already-published version; do not republish it. The workflow log and npm registry are the source of truth.
 
-After the first release, the package can use an npm trusted publisher for this repository and workflow through OIDC. The first release uses the configured `NPM_TOKEN` to establish ownership under the npm account.
+After the first release, the package can use an npm trusted publisher for this repository and workflow through OIDC. The manual release uses the configured `NPM_TOKEN` to establish ownership under the npm account.
 
 References: [scoped public packages](https://docs.npmjs.com/creating-and-publishing-scoped-public-packages/), [npm publishing](https://docs.npmjs.com/cli/v11/commands/npm-publish/), [staged publishing](https://docs.npmjs.com/staged-publishing/), [creating new staged packages](https://github.blog/changelog/2026-10-02-npm-staged-publishing-now-supports-creating-new-packages/), [publish-time scanning](https://github.blog/changelog/2026-07-28-npm-publish-time-malware-scanning-and-dual-use-metadata/), [trusted publishers](https://docs.npmjs.com/trusted-publishers/).

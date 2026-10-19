@@ -25,6 +25,7 @@ export default defineConfig({
     lib: {
       entry: fileURLToPath(new URL("./src/lib/entry.js", import.meta.url)),
       formats: ["es", "cjs"],
+      cssFileName: "style",
       fileName: (format) => (format === "es" ? "vuewind.js" : "vuewind.cjs"),
     },
     rollupOptions: { external: ["vue"] },

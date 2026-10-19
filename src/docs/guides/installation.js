@@ -5,7 +5,7 @@ export default {
     {
       id: "requirements",
       title: "A comfortable starting point.",
-      body: "Start with an existing Vue 3.5 application. Vuewind provides compiled components, TypeScript declarations, and one shared stylesheet. You do not need Tailwind, the documentation app, or a Vuewind plugin to use the package.",
+      body: "Start with an existing Vue 3.5.42 or newer application. Vuewind provides compiled components, TypeScript declarations, and one shared stylesheet. You do not need Tailwind, the documentation app, or a Vuewind plugin to use the package.",
     },
     {
       id: "install",
@@ -40,7 +40,7 @@ export default {
     {
       id: "repository",
       title: "Explore the source, too.",
-      body: "To work on the library or run the documentation locally, clone the repository. This is a separate workflow from installing Vuewind into an existing app. Use Node.js 20.19 or newer for repository development.",
+      body: "To work on the library or run the documentation locally, clone the repository. This is a separate workflow from installing Vuewind into an existing app. Use Node.js 22.13 or newer, or a current LTS release, for repository development.",
       code: "git clone https://github.com/BAGOMBEKA-JOB-DEV/vuewind.git\ncd vuewind\nnpm ci\nnpm run dev",
       language: "shell",
     },

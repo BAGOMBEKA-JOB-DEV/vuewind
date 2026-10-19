@@ -21,6 +21,8 @@ jobs:
           node-version: "24"
           package-manager-cache: false
       - run: npm ci --ignore-scripts
+      - run: npm run audit
+      - run: npm run lint
       - run: npm run release:check
       - run: npm run build:docs
       - run: npm run test:browser
