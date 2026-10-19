@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -8,12 +8,15 @@
       name="description"
       content="60 thoughtfully crafted Vue components. Beautiful defaults, semantic themes, live examples, and room to make them yours."
     />
-    <meta name="theme-color" content="#fafbf9" />
+    <meta name="theme-color" content="#141815" />
     <link rel="canonical" href="https://vuewind-two.vercel.app/" />
     <title>Introduction — Vuewind</title>
     <script>
       try {
-        const mode = localStorage.getItem("vuewind-theme");
+        const saved = localStorage.getItem("vuewind-theme");
+        const mode = ["light", "dark", "system"].includes(saved)
+          ? saved
+          : "dark";
         const accent = localStorage.getItem("vuewind-accent");
         document.documentElement.classList.toggle(
           "dark",
@@ -21,6 +24,14 @@
             (mode === "system" &&
               matchMedia("(prefers-color-scheme: dark)").matches),
         );
+        document
+          .querySelector('meta[name="theme-color"]')
+          .setAttribute(
+            "content",
+            document.documentElement.classList.contains("dark")
+              ? "#141815"
+              : "#fafbf9",
+          );
         if (["green", "blue", "violet"].includes(accent))
           document.documentElement.dataset.accent = accent;
       } catch {}

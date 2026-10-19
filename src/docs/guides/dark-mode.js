@@ -12,7 +12,7 @@ export default {
     {
       id: "preference",
       title: "Respect a personal preference.",
-      body: "The documentation theme store supports light, dark, and system modes. It also persists the accent color. Browser storage failures do not prevent switching themes.",
+      body: "The documentation opens in dark mode by default. Saved light, dark, and system preferences take precedence, and the theme toggle remains available in the header. The theme store also persists the accent color. Browser storage failures do not prevent switching themes.",
       code: "import { useThemeStore } from '@/stores/theme'\n\nconst theme = useThemeStore()\ntheme.mode = 'system'\ntheme.accent = 'green'",
       language: "js",
     },

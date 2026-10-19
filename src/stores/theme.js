@@ -2,7 +2,7 @@ import { ref, computed, watch } from "vue";
 import { defineStore } from "pinia";
 
 export const useThemeStore = defineStore("docs-theme", () => {
-  const mode = ref("light");
+  const mode = ref("dark");
   const accent = ref("green");
   const systemDark = ref(false);
   const isDark = computed(
@@ -29,6 +29,9 @@ export const useThemeStore = defineStore("docs-theme", () => {
       [isDark, mode, accent],
       () => {
         document.documentElement.classList.toggle("dark", isDark.value);
+        document
+          .querySelector('meta[name="theme-color"]')
+          ?.setAttribute("content", isDark.value ? "#141815" : "#fafbf9");
         document.documentElement.dataset.accent = accent.value;
         try {
           localStorage.setItem("vuewind-theme", mode.value);
