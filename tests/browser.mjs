@@ -268,38 +268,49 @@ try {
   await send("Page.enable");
   await send("Runtime.enable");
   await viewport(1600, 1100);
+  await check("Desktop homepage defaults to dark mode", async () => {
+    await navigate("/");
+    assert.ok(
+      await evaluate("document.documentElement.classList.contains('dark')"),
+    );
+    assert.match(
+      await evaluate("document.querySelector('h1').textContent"),
+      /Good ideas/,
+    );
+    assert.equal(
+      await evaluate("document.querySelectorAll('.showcase-card').length"),
+      4,
+    );
+    await screenshot("desktop-home.png", true);
+  });
   await check(
-    "Desktop homepage renders the new documentation design",
+    "Theme choices and accent persist across page loads",
     async () => {
-      await navigate("/");
-      assert.match(
-        await evaluate("document.querySelector('h1').textContent"),
-        /Good ideas/,
-      );
+      await click('.header-icon[aria-label="Switch to light mode"]');
+      await until("!document.documentElement.classList.contains('dark')");
+      await navigate("/components/button");
       assert.equal(
-        await evaluate("document.querySelectorAll('.showcase-card').length"),
-        4,
+        await evaluate("document.documentElement.classList.contains('dark')"),
+        false,
       );
-      await screenshot("desktop-home.png", true);
+      await navigate("/");
+      await click('.header-icon[aria-label="Switch to dark mode"]');
+      await click(".accent-options button.blue");
+      await until(
+        "document.documentElement.classList.contains('dark') && document.documentElement.dataset.accent==='blue'",
+      );
+      await screenshot("desktop-dark.png", true);
+      await navigate("/components/button");
+      assert.ok(
+        await evaluate(
+          "document.documentElement.classList.contains('dark') && document.documentElement.dataset.accent==='blue'",
+        ),
+      );
+      await evaluate(
+        "localStorage.setItem('vuewind-theme','light');localStorage.setItem('vuewind-accent','green')",
+      );
     },
   );
-  await check("Dark mode and accent persist across page loads", async () => {
-    await click('.header-icon[aria-label="Switch to dark mode"]');
-    await click(".accent-options button.blue");
-    await until(
-      "document.documentElement.classList.contains('dark') && document.documentElement.dataset.accent==='blue'",
-    );
-    await screenshot("desktop-dark.png", true);
-    await navigate("/components/button");
-    assert.ok(
-      await evaluate(
-        "document.documentElement.classList.contains('dark') && document.documentElement.dataset.accent==='blue'",
-      ),
-    );
-    await evaluate(
-      "localStorage.setItem('vuewind-theme','light');localStorage.setItem('vuewind-accent','green')",
-    );
-  });
   await check(
     "All 60 component routes load live examples without runtime errors",
     async () => {
@@ -464,6 +475,7 @@ try {
     "Mobile navigation and main layouts fit a 390px viewport",
     async () => {
       await viewport(390, 844);
+      await evaluate("localStorage.removeItem('vuewind-theme')");
       for (const route of [
         "/",
         "/components",
