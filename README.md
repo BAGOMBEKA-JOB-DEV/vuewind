@@ -35,8 +35,6 @@ const name = ref("");
 
 Vue is a peer dependency. Tailwind and the documentation dependencies are not required in consuming apps. ESM, CommonJS, TypeScript declarations, and `vuewind/style.css` are included. CSS is marked as a side effect so production bundlers preserve it.
 
-Version 1.0.0 is prepared for its first manual npm release. The install command becomes available after publication. See [the release guide](docs/RELEASING.md) for the maintainer steps.
-
 ## Components and theming
 
 The collection covers actions, forms, data display, navigation, feedback, overlays, and layout. A `VwIcon` helper is also exported for use in composed examples.
@@ -89,7 +87,7 @@ The browser check uses a local Chrome or Chromium executable. Set `BROWSER_BIN` 
 
 ## Manual releases and documentation deployment
 
-Maintainers publish manually through **Actions → Publish Vuewind → Run workflow** after merging into `main`. The first publication needs the repository Actions secret `NPM_TOKEN`. The default workflow run validates and uploads an artifact; enabling `publish` sends that verified tarball to npm and creates the GitHub release. Pushes and PRs never publish packages.
+Maintainers publish manually through **Actions → Publish Vuewind → Run workflow** after merging into `main`, using the repository Actions secret `NPM_TOKEN`. Leave both `publish` and `stage` off for a dry run. Enable `publish` for direct publication with an appropriately authorized token, or enable `stage` to upload the verified package for account approval with 2FA on npm. Pushes and PRs never publish packages.
 
 The existing Vercel integration deploys https://vuewind-two.vercel.app/ after merge. No separate deployment workflow or hosting migration is introduced.
 

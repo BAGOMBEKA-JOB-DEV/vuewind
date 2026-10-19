@@ -9,7 +9,12 @@ on:
         default: "1.0.0"
         type: string
       publish:
-        description: Publish to npm and create the GitHub release (off means dry run)
+        description: Publish directly to npm and create the GitHub release
+        required: true
+        default: false
+        type: boolean
+      stage:
+        description: Stage on npm for account approval with 2FA (keep publish off)
         required: true
         default: false
         type: boolean
@@ -31,6 +36,7 @@ jobs:
     env:
       RELEASE_VERSION: ${{ inputs.version }}
       PUBLISH_REQUESTED: ${{ inputs.publish }}
+      STAGE_REQUESTED: ${{ inputs.stage }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -51,11 +57,17 @@ jobs:
           if (!fs.existsSync(`docs/releases/${pkg.version}.md`)) {
             throw new Error('Add version-specific release notes before running the release workflow.');
           }
-          if (process.env.PUBLISH_REQUESTED === 'true' &&
+          if (process.env.PUBLISH_REQUESTED === 'true' && process.env.STAGE_REQUESTED === 'true') {
+            throw new Error('Choose either direct publication or staged publication, not both.');
+          }
+          if ((process.env.PUBLISH_REQUESTED === 'true' || process.env.STAGE_REQUESTED === 'true') &&
               (process.env.GITHUB_REF !== 'refs/heads/main' || process.env.GITHUB_REPOSITORY !== 'BAGOMBEKA-JOB-DEV/vuewind')) {
             throw new Error('Publish from the main branch of BAGOMBEKA-JOB-DEV/vuewind after merging the release PR.');
           }
           NODE
+      - name: Install npm with staged publishing support
+        if: inputs.stage
+        run: npm install --global npm@11.21.0 --ignore-scripts --no-audit --no-fund
       - run: npm ci --ignore-scripts
       - name: Validate the release and packed consumer
         run: npm run release:check
@@ -71,6 +83,24 @@ jobs:
         with:
           name: vuewind-${{ inputs.version }}
           path: artifacts/*.tgz
+          if-no-files-found: error
+      - name: Stage on npm for account approval
+        if: inputs.stage
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ -z "$NODE_AUTH_TOKEN" ]; then
+            echo "::error::Add a write-enabled npm token as the repository Actions secret NPM_TOKEN."
+            exit 1
+          fi
+          npm stage publish "./artifacts/vuewind-${RELEASE_VERSION}.tgz" --ignore-scripts --access public --tag latest --provenance --json > artifacts/staged-release.json
+          cat artifacts/staged-release.json
+          echo "Staged vuewind@${RELEASE_VERSION}. Approve the package on npm with your account's 2FA to make it publicly installable." >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v6
+        if: inputs.stage
+        with:
+          name: vuewind-${{ inputs.version }}-staging
+          path: artifacts/staged-release.json
           if-no-files-found: error
       - name: Publish to npm (manual opt-in)
         if: inputs.publish
