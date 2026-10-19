@@ -1,12 +1,26 @@
 # Publish Vuewind manually
 
-The public package is named `vuewind`. `npm install vuewind` resolves to this library after successful npm publication; pushing or merging a PR does not publish it. A staged package is not a completed release.
+The intended public package name is `vuewind`. Version `1.0.0` is prepared, but its first npm publication is blocked by npm's name-similarity policy. `npm install vuewind` does not currently install this library. Pushing or merging a PR does not publish it, and a staged package is not a completed release.
+
+## Current blocker: package name eligibility
+
+The authenticated [publication attempt](https://github.com/BAGOMBEKA-JOB-DEV/vuewind/actions/runs/39246991477) reached npm and was rejected with HTTP 403 because `vuewind` is too similar to the existing package `vue-wind`. npm compares names without punctuation, so a 404 response for `vuewind` does not establish that the name can be registered.
+
+The package retains the exact name `vuewind`. The next step is a registry review through [npm Support](https://www.npmjs.com/support), using the prepared [review request](npm-name-review-request.md). The request is a draft; no support case has been submitted. npm decides whether an exception is available.
+
+Until this is resolved, the verified GitHub prerelease archive can be installed directly:
+
+```sh
+npm install https://github.com/BAGOMBEKA-JOB-DEV/vuewind/releases/download/v1.0.0/vuewind-1.0.0.tgz
+```
+
+Resume the npm publication workflow only after npm confirms the name is eligible. The release checks and npm registry remain the source of truth for publication status.
 
 ## First release
 
 1. Merge the release PR into `main`. This also updates the documentation through the existing Vercel integration at https://vuewind-two.vercel.app/.
-2. Sign in to the npm account that will own `vuewind`. The name was unregistered when checked on October 19, 2026; npm confirms availability only when publication succeeds.
-3. Create an npm granular token with permission to publish or stage the new package. Direct CI publication requires a token allowed to publish with **Bypass 2FA** enabled when npm requires it. A token without this permission can use the staged release path below; approval then requires the account owner's 2FA.
+2. Sign in to the npm account that will own `vuewind` and confirm registry name eligibility as described above.
+3. For the first publication of a new unscoped package, use a granular token with **Read and write (publish and stage)**, **All Packages**, and **Bypass 2FA** enabled for direct CI publishing. A stage-only token cannot create the new package. The current configured token passed authentication; the remaining blocker is package name eligibility.
 4. In **BAGOMBEKA-JOB-DEV/vuewind → Settings → Secrets and variables → Actions**, add the token as the repository secret **NPM_TOKEN**. Never commit it to the repository.
 5. Open **Actions → Publish Vuewind → Run workflow**. Select **main**, keep version **1.0.0**, and leave both **publish** and **stage** off for an initial dry run.
 6. Inspect the validation result and downloadable `vuewind-1.0.0` artifact. The workflow validates the package installed into an isolated consumer, not just its source tree.
@@ -21,7 +35,7 @@ npm install vuewind
 
 ## Staged release when npm requires account approval
 
-The first direct publication attempt was rejected by npm with HTTP 403 because its token did not satisfy npm's 2FA requirement. Staging preserves that requirement while preparing the exact package for approval:
+For later versions of an eligible package, staging prepares the exact package for account approval while preserving npm's 2FA requirement. A stage-only token requires the package to exist already. Staging cannot resolve a registry name restriction.
 
 1. Run **Publish Vuewind** from **main** with the matching version, **stage** enabled, and **publish** off. The workflow uses npm 11.21.0, validates the package, uploads it with provenance, and saves the staging result as an artifact.
 2. Sign in to npm, open **Staged Packages**, review `vuewind@1.0.0`, and approve it with your account's 2FA. The staging output also identifies the staged package for `npm stage view <stage-id>` or `npm stage approve <stage-id>`.
@@ -51,4 +65,4 @@ If npm publication succeeds but GitHub release creation fails, create the GitHub
 
 After the package exists, you can configure an npm trusted publisher for this repository and workflow and migrate the publication step to OIDC. The first release in this PR uses the explicitly configured `NPM_TOKEN` so ownership is established by your npm account.
 
-References: [npm publishing](https://docs.npmjs.com/cli/v11/commands/npm-publish/), [npm staged publishing](https://docs.npmjs.com/staged-publishing/), [npm trusted publishers](https://docs.npmjs.com/trusted-publishers/), [GitHub manual workflows](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow).
+References: [npm publishing](https://docs.npmjs.com/cli/v11/commands/npm-publish/), [npm naming policy](https://blog.npmjs.org/post/168978377570/new-package-moniker-rules.html), [npm staged publishing](https://docs.npmjs.com/staged-publishing/), [npm trusted publishers](https://docs.npmjs.com/trusted-publishers/), [GitHub manual workflows](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow).
