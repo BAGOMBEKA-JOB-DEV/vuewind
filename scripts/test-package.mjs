@@ -90,7 +90,12 @@ try {
     await readFile(path.join(root, "node_modules/vue/package.json"), "utf8"),
   );
   assert.match(installedVue.version, /^3\./);
-  assert.ok(Number(installedVue.version.split(".")[1]) >= 5);
+  const [, minor, patch] = installedVue.version.split(".").map(Number);
+  assert.equal(pkg.peerDependencies.vue, "^3.5.42");
+  assert.ok(
+    minor > 5 || (minor === 5 && patch >= 42),
+    "Use a Vue version with the SSR attribute-name security fix.",
+  );
   await symlink(
     path.join(root, "node_modules/vue"),
     path.join(consumer, "node_modules/vue"),

@@ -6,7 +6,7 @@ on:
       version:
         description: Exact version in package.json
         required: true
-        default: "1.0.0"
+        default: "1.0.1"
         type: string
       publish:
         description: Publish directly to npm and create the GitHub release
@@ -69,6 +69,8 @@ jobs:
         if: inputs.stage
         run: npm install --global npm@11.21.0 --ignore-scripts --no-audit --no-fund
       - run: npm ci --ignore-scripts
+      - run: npm run audit
+      - run: npm run lint
       - name: Validate the release and packed consumer
         run: npm run release:check
       - name: Build documentation
