@@ -1,42 +1,29 @@
 # Vuewind
 
-A thoughtful foundation for your next Vue project. 60 source components, runnable examples, and a documentation workspace built with Vue 3.5 and Vite.
+60 thoughtful Vue 3 components with typed APIs, semantic themes, and native browser foundations.
 
-## Get started
+[Documentation](https://vuewind-two.vercel.app/) · [Components](https://vuewind-two.vercel.app/components) · [GitHub](https://github.com/BAGOMBEKA-JOB-DEV/vuewind)
 
-Use Node.js 20.19+ and npm.
+## Install
+
+In an existing Vue 3.5+ application:
 
 ```sh
-git clone https://github.com/BAGOMBEKA-JOB-DEV/vuewind.git
-cd vuewind
-git checkout redesign/vuewind-docs-v2
-npm install
-npm run dev
+npm install vuewind
 ```
 
-The development server normally runs at http://localhost:5173.
+Load the stylesheet once in your app entry:
 
-## Structure
+```js
+import "vuewind/style.css";
+```
 
-| Path                 | Purpose                                               |
-| -------------------- | ----------------------------------------------------- |
-| `src/lib/components` | The 60 new Vw components                              |
-| `src/lib/styles`     | Semantic tokens and shared component styles           |
-| `src/lib/index.js`   | Named component exports                               |
-| `src/docs`           | Documentation shell, guides, search, and previews     |
-| `src/docs/examples`  | Runnable Vue examples, also shown in the Code tab     |
-| `src/docs/content`   | Component API and interaction documentation           |
-| `src/components`     | Original dashboard components, retained for reference |
-| `tests`              | Catalog, rendering, logic, and browser checks         |
-
-## Use a component
-
-Within this checkout:
+Then import only the components you need:
 
 ```vue
 <script setup>
 import { ref } from "vue";
-import { VwButton, VwInput } from "@/lib";
+import { VwButton, VwInput } from "vuewind";
 const name = ref("");
 </script>
 
@@ -46,32 +33,67 @@ const name = ref("");
 </template>
 ```
 
-For another Vue 3.5 project, copy `src/lib` and load `styles/tokens.css` and `styles/components.css` once in the app entry. There is no published npm package yet.
+Vue is a peer dependency. Tailwind and the documentation dependencies are not required in consuming apps. ESM, CommonJS, TypeScript declarations, and `vuewind/style.css` are included. CSS is marked as a side effect so production bundlers preserve it.
 
-## Commands
+Version 1.0.0 is prepared for its first manual npm release. The install command becomes available after publication. See [the release guide](docs/RELEASING.md) for the maintainer steps.
 
-```sh
-npm test                 # Logic, catalog, SFC, imports, and SSR checks
-npm run test:browser     # Browser interactions, layouts, and screenshots
-npm run build            # Documentation app to dist/
-npm run build:lib        # Standalone ES module + CSS to lib-dist/
-npm run preview          # Preview the production documentation build
-npm run format:new       # Format the redesigned source
+## Components and theming
+
+The collection covers actions, forms, data display, navigation, feedback, overlays, and layout. A `VwIcon` helper is also exported for use in composed examples.
+
+Components use standard Vue slots, props, and v-model events. Override semantic `--vw-*` CSS variables to customize colors and radius. Add the `dark` class to your document root for the dark palette. No global plugin registration is required.
+
+```css
+:root {
+  --vw-primary: #3566bd;
+  --vw-primary-hover: #28539e;
+  --vw-primary-soft: #ecf1fc;
+}
 ```
 
-The browser check uses a local Chrome or Chromium executable. Set `BROWSER_BIN` if auto-detection cannot find yours. It starts and cleans up its own local server and browser. Screenshots are saved to `test-results/`.
+Controls prefer native browser elements. Modal overlays use native dialog focus containment. Calendar and DropdownMenu use native button/disclosure semantics rather than claiming full ARIA grid/menu implementations. Verify accessibility in your application.
 
-## Design and behavior
+## Work on the repository
 
-Components use semantic `--vw-*` CSS properties, `vw-` class names, Vue slots, and controlled v-model bindings. Documentation includes three accents, persistent light/dark/system mode, Command/Ctrl K search, and a mobile drawer.
+Use Node.js 20.19+ and npm. This runs the documentation app, separate from installing the package in another app:
 
-Controls prefer native browser elements. Modal overlays use native dialog focus containment. Calendar and DropdownMenu use simpler native semantics rather than claiming full ARIA grid/menu implementations. Validate accessibility in your own application.
+```sh
+git clone https://github.com/BAGOMBEKA-JOB-DEV/vuewind.git
+cd vuewind
+npm ci
+npm run dev
+```
 
-The original Tailwind 3 configuration and dashboard source remain for gradual migration. They are excluded from the new library entry. See the in-app migration guide and [redesign decisions](docs/redesign-research.md).
+| Path               | Purpose                                                 |
+| ------------------ | ------------------------------------------------------- |
+| `src/lib`          | Public components, exports, semantic tokens, and styles |
+| `src/docs`         | Documentation workspace, guides, and live examples      |
+| `src/docs/content` | Component API and interaction records                   |
+| `src/components`   | Original dashboard source, retained for migration       |
+| `scripts`          | Type generation and installed-package verification      |
+| `tests`            | Contract, compilation, SSR, and browser checks          |
 
-## Deployment
+```sh
+npm test                 # Component contracts, imports, SSR, and helpers
+npm run build            # Documentation app → dist/ (existing Vercel build)
+npm run build:lib        # ESM, CommonJS, CSS, and declarations → lib-dist/
+npm run test:package     # Install the built tarball and compile all examples
+npm run test:browser     # Keyboard, forms, themes, responsive layouts
+npm run release:check    # Full package release validation
+npm pack                 # Build and create the publishable tarball
+```
 
-Serve `dist/` with SPA history fallback. The Dockerfile builds with Node 22 and serves through Nginx. The documentation app needs no environment file or backend.
+`test:package` builds an isolated consumer from the actual npm tarball and uses the checkout's installed Vue peer without network access. It verifies ESM and CommonJS imports, SSR, styles, and all 60 examples using public package imports.
+
+The browser check uses a local Chrome or Chromium executable. Set `BROWSER_BIN` if needed. Screenshots are saved to `test-results/`.
+
+## Manual releases and documentation deployment
+
+Maintainers publish manually through **Actions → Publish Vuewind → Run workflow** after merging into `main`. The first publication needs the repository Actions secret `NPM_TOKEN`. The default workflow run validates and uploads an artifact; enabling `publish` sends that verified tarball to npm and creates the GitHub release. Pushes and PRs never publish packages.
+
+The existing Vercel integration deploys https://vuewind-two.vercel.app/ after merge. No separate deployment workflow or hosting migration is introduced.
+
+See [release instructions](docs/RELEASING.md), [1.0.0 release notes](docs/releases/1.0.0.md), [contribution guidance](CONTRIBUTING.md), and [redesign research](docs/redesign-research.md).
 
 ## License
 

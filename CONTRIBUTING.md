@@ -10,7 +10,10 @@ Prefer native HTML, explicit props and emits, semantic CSS tokens, and readable 
 npm test
 npm run build
 npm run build:lib
+npm run test:package
 npm run test:browser
 ```
 
 Inspect changed examples in light and dark modes with keyboard navigation. Test narrow layouts and browser zoom. Describe the behavior, motivation, and relevant validation in the PR.
+
+Publication is manual through the repository's **Publish Vuewind** workflow after merge. See [release instructions](docs/RELEASING.md). Documentation deploys through the existing Vercel integration.
