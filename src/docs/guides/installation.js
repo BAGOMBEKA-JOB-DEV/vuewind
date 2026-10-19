@@ -13,7 +13,7 @@ export default {
       body: "Install the public package from npm. Vue is a peer dependency, so your application keeps control of its Vue runtime.",
       code: "npm install vuewind",
       language: "shell",
-      note: "Version 1.0.0 is prepared for its first manual npm release. If npm still reports that vuewind is not found, the maintainer has not completed that first publication yet.",
+      note: "Version 1.0.0 is awaiting npm account approval. Until publication is complete, install the verified package archive from the GitHub release; npm's staging placeholder does not contain Vuewind.",
     },
     {
       id: "styles",
