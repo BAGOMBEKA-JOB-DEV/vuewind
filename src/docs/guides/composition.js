@@ -11,7 +11,7 @@ export default {
       id: "state",
       title: "Keep the state close.",
       body: "Controlled inputs use modelValue and update:modelValue. Vue’s v-model syntax keeps the relationship clear. Vuewind components do not mutate your application arrays or make API calls.",
-      code: "<script setup>\nimport { ref } from 'vue'\nimport { VwSwitch } from 'vuewind'\nconst notifications = ref(true)\n</script>\n\n<template>\n  <VwSwitch v-model=\"notifications\" label=\"Notifications\" />\n</template>",
+      code: "<script setup>\nimport { ref } from 'vue'\nimport { VwSwitch } from '@bagombeka/vuewind'\nconst notifications = ref(true)\n</script>\n\n<template>\n  <VwSwitch v-model=\"notifications\" label=\"Notifications\" />\n</template>",
       language: "vue",
     },
     {

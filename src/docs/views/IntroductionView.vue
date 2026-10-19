@@ -24,7 +24,7 @@ const people = [
   { name: "Priya Patel" },
   { name: "Daniel Lee" },
 ];
-const quickStartCode = "npm install vuewind";
+const quickStartCode = "npm install @bagombeka/vuewind";
 const toc = [
   { id: "overview", label: "Overview" },
   { id: "the-collection", label: "The collection" },
@@ -325,8 +325,8 @@ function subscribe() {
           <div class="eyebrow">FROM IDEA TO INTERFACE</div>
           <h2 class="section-heading">Your next chapter starts here.</h2>
           <p class="section-description">
-            Install Vuewind, import vuewind/style.css in your app entry, and
-            start composing.
+            Install Vuewind, import @bagombeka/vuewind/style.css in your app
+            entry, and start composing.
           </p>
           <RouterLink to="/docs/installation" class="text-link"
             >Read the installation guide <Icon name="right" :size="14"
